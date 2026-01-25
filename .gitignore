@@ -1,0 +1,195 @@
+# Logbuch ohne Pose - .gitignore
+
+# ============================================================================
+# Arduino / ESP32
+# ============================================================================
+*.o
+*.a
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+.pio/
+.vscode/
+.DS_Store
+
+# Arduino IDE
+*.ino~
+*.sketch~
+
+# PlatformIO
+.pio
+.pioenvs
+.piolibdeps
+
+# ============================================================================
+# Python
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# ============================================================================
+# 3D Printing
+# ============================================================================
+*.gcode
+*.bgcode
+*.3mf.bak
+*.stl.bak
+
+# Slicer temp files
+*.3mf~
+*.amf~
+
+# ============================================================================
+# CAD / Electronics
+# ============================================================================
+# Eagle
+*.b#*
+*.s#*
+*.l#*
+*.ger
+*.dri
+*.gpi
+*.gto
+*.gtp
+*.gts
+*.gtl
+*.gbl
+*.gbs
+*.gbo
+*.gbp
+*.pro
+
+# KiCAD
+*-rescue.lib
+*-rescue.dcm
+*.bak
+*.kicad_pcb-bak
+*.net
+fp-info-cache
+
+# ============================================================================
+# Office / Documents
+# ============================================================================
+~$*.doc*
+~$*.xls*
+~$*.ppt*
+*.tmp
+.~lock.*
+
+# Excel temp
+~$*.xlsx
+
+# ============================================================================
+# Data & Logs
+# ============================================================================
+*.log
+*.csv.bak
+*.db
+*.sqlite
+*.sqlite3
+
+# Measurement data backups
+messungen/*backup*
+messungen/*temp*
+
+# ============================================================================
+# OS Specific
+# ============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ============================================================================
+# IDEs
+# ============================================================================
+# VSCode
+.vscode/
+*.code-workspace
+
+# IntelliJ / PyCharm
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================================================
+# Personal / Sensitive
+# ============================================================================
+# WiFi credentials, API keys etc
+secrets.h
+secrets.hpp
+config_local.h
+credentials.txt
+*.key
+*.pem
+*.p12
+
+# Personal notes
+TODO.private.md
+notes_private.md
+
+# ============================================================================
+# Build artifacts
+# ============================================================================
+build/
+out/
+output/
+*.zip
+*.tar.gz
+
+# ============================================================================
+# Projekt-spezifisch
+# ============================================================================
+# Große Dateien die nicht ins Repo gehören
+*.mp4
+*.avi
+*.mov
+
+# Rohe Messdaten (zu groß)
+messungen/raw/*
+*.raw
+
+# Private Fotos
+fotos/privat/
+fotos/*_unbearbeitet/
+
+# ============================================================================
+# Aber diese BEHALTEN:
+# ============================================================================
+!.gitkeep
+!messungen/beispiel*.csv
+!fotos/setup/*.jpg
+!fotos/setup/*.png

@@ -1,0 +1,176 @@
+# License
+
+This repository contains multiple types of content, each under different licenses:
+
+---
+
+## Software (Code)
+
+**MIT License**
+
+Copyright (c) 2025 Logbuch ohne Pose
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+**Applies to:**
+- All `.ino`, `.cpp`, `.h`, `.hpp` files
+- All `.py`, `.js`, `.ts` files
+- Scripts and tools in `/berechnungen/` and `/tools/`
+
+---
+
+## Hardware & Schematics
+
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
+
+Hardware designs, schematics, PCB layouts, and 3D models are licensed under 
+CC BY-SA 4.0.
+
+You are free to:
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material for any purpose, 
+  even commercially
+
+Under the following terms:
+- **Attribution** — You must give appropriate credit, provide a link to the 
+  license, and indicate if changes were made
+- **ShareAlike** — If you remix, transform, or build upon the material, you 
+  must distribute your contributions under the same license
+
+https://creativecommons.org/licenses/by-sa/4.0/
+
+**Applies to:**
+- Schematics (`.html`, `.svg`, `.pdf` in `/hardware/`)
+- PCB designs (Eagle, KiCAD files)
+- 3D models (`.stl`, `.step`, `.obj` files)
+- Hardware documentation
+
+---
+
+## Documentation & Book Content
+
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
+
+Documentation, tutorials, guides, and book preview content are licensed under 
+CC BY-SA 4.0.
+
+https://creativecommons.org/licenses/by-sa/4.0/
+
+**Applies to:**
+- All `.md` files (except book chapter previews)
+- Documentation in `/docs/`
+- Tutorials and guides
+- README files
+
+---
+
+## Book Chapters (Preview Content)
+
+**Copyright © 2025 - All Rights Reserved**
+
+The book chapter files in `/band-2-strom/kapitel/` and similar directories are 
+provided as previews and are subject to copyright.
+
+**Permitted use:**
+- Reading for personal learning and reference
+- Linking to and sharing the GitHub repository
+- Using the technical information for building projects
+
+**Not permitted:**
+- Commercial redistribution
+- Publishing or selling the content
+- Incorporating into other books or publications without permission
+
+For full book versions, please purchase through official channels.
+
+---
+
+## Data & Measurements
+
+**Creative Commons Zero (CC0 1.0 Universal) - Public Domain**
+
+All measurement data, logs, and CSV files are released into the public domain.
+
+https://creativecommons.org/publicdomain/zero/1.0/
+
+**Applies to:**
+- All `.csv` files in `/messungen/`
+- Log files and data exports
+- Measurement results and statistics
+
+You can copy, modify, and use this data for any purpose without asking permission.
+
+---
+
+## Photos & Images
+
+**Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)**
+
+Photos and images in the repository are licensed under CC BY-SA 4.0.
+
+https://creativecommons.org/licenses/by-sa/4.0/
+
+**Applies to:**
+- Photos in `/fotos/`
+- Diagrams and illustrations
+- Screenshots (except those containing third-party content)
+
+---
+
+## Third-Party Content
+
+Some content may be subject to third-party licenses:
+- Arduino libraries: See respective library licenses
+- External tools: See tool documentation
+- Referenced specifications: See original sources
+
+---
+
+## Attribution
+
+When using content from this repository, please provide attribution:
+
+**For projects:**
+```
+Hardware design based on "Logbuch ohne Pose - Boot-Digitalisierung"
+https://github.com/[your-username]/logbuch-ohne-pose
+```
+
+**For documentation:**
+```
+Adapted from "Logbuch ohne Pose" by [Author]
+https://github.com/[your-username]/logbuch-ohne-pose
+Licensed under CC BY-SA 4.0
+```
+
+---
+
+## Questions?
+
+If you're unsure about the license for a specific file or use case, please open 
+an issue on GitHub or contact the author.
+
+---
+
+**Summary:**
+- 💻 **Code:** MIT (do whatever you want)
+- 🔧 **Hardware:** CC BY-SA 4.0 (share alike)
+- 📝 **Docs:** CC BY-SA 4.0 (share alike)
+- 📚 **Book chapters:** Copyright (preview only)
+- 📊 **Data:** CC0 (public domain)
