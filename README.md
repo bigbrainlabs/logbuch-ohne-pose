@@ -253,17 +253,28 @@ Die vollständigen Bücher mit allen Kapiteln, Fotos, Diagrammen und Hintergrund
 
 ---
 
-## ⭐ Support
+## ⭐ Support / Buch kaufen
 
-**Dir gefällt das Projekt?**
+**Hier ist alles. Wenn's dir hilft, kauf das Buch. Wenn nicht, auch OK.** 🤷‍♂️
 
+Alle Inhalte sind frei verfügbar auf GitHub. Die Bücher gibt's für die, die:
+- ✅ Das Projekt gut finden und danke sagen wollen
+- ✅ Lieber auf Kindle/gedruckt lesen (am Boot kein Internet!)
+- ✅ Schön editiert & lektoriert haben wollen
+- ✅ Weitere Projekte unterstützen möchten
+
+**Die Bücher:**
+→ **Band 2: Strom ist nie einfach** – [Amazon KDP](#) *(~7€ Kindle, ~12€ Print)* – folgt 2025  
+→ **Band X: Boot-Digitalisierung** – [Amazon KDP](#) *(~7€ Kindle, ~12€ Print)* – in Planung
+
+**Andere Wege zu helfen:**
 → ⭐ **Star** auf GitHub – Hilft anderen es zu finden  
-→ 📖 **Buch kaufen** – Unterstützt weitere Projekte  
 → 🔀 **Fork & Erweitern** – Bau deine eigene Version  
-→ 💬 **Teilen** – Erzähl anderen davon
+→ 💬 **Teilen** – Erzähl anderen davon  
+→ 🐛 **Issues melden** – Fehler gefunden? Sag Bescheid!
 
 ---
 
 **Made with ⚓ and many ☕**
 
-*"Autarkie bedeutet nicht perfekt. Autarkie bedeutet: Es läuft. Meistens. Und wenn nicht, weiß man warum."*
+*"Hier ist alles. Open Source heißt: Du darfst damit machen was du willst. Auch nichts kaufen. Auch das ist OK."*

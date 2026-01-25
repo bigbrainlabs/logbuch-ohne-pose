@@ -396,18 +396,25 @@ npm install @signalk/signalk-mqtt-gw
 
 Dieses Projekt ist die **technische Umsetzung** von **Band 2 (Kapitel 7 & 8)**.
 
-**Im Buch findest du:**
-- Kompletten Lernprozess (inkl. Fehler!)
-- Warum Messen besser ist als Raten
-- Dashboard-Integration im Detail
-- Kalibrierung Schritt-für-Schritt
-- Troubleshooting-Stories
+**Was wo zu finden ist:**
 
-**Im Repo findest du:**
-- Kompletten Code (funktionsfähig)
-- Schaltpläne (nachbaubar)
-- Stückliste (mit Links)
-- Installation (Step-by-Step)
+**Hier auf GitHub (kostenlos):**
+- ✅ Kompletter Code (funktionsfähig)
+- ✅ Schaltpläne (nachbaubar)
+- ✅ Stückliste (mit Links)
+- ✅ Installation (Step-by-Step)
+- ✅ Troubleshooting (alle Probleme)
+
+**Im Buch (folgt 2025, ~7€ Kindle):**
+- Die **Story** vom Bauen (Trial & Error)
+- Alle **Fehler & Learnings** im Detail
+- Warum Messen besser ist als Raten
+- Dashboard-Integration Schritt-für-Schritt
+- Kalibrierung mit echten Beispielen
+
+**Strategie:** Hardware muss frei sein (sonst baut's keiner nach!). Die Story gibt's im Buch für die, die "Danke" sagen wollen.
+
+**Hier ist alles. Wenn's dir hilft, kauf das Buch. Wenn nicht, auch OK.** 😊
 
 ---
 

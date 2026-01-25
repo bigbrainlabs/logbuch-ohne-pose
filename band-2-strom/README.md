@@ -7,6 +7,10 @@
 
 ---
 
+**📖 Hinweis:** Alle Kapitel sind hier **vollständig und kostenlos lesbar**. Das Buch (folgt 2025) bietet editierte Version, Fotos und bequemes Format. [Mehr dazu](#-das-vollständige-buch)
+
+---
+
 ## 📖 Über dieses Buch
 
 Dies ist kein technisches Handbuch.  
@@ -195,16 +199,29 @@ Akku beobachtet      →   Akku überwacht
 
 ## 📖 Das vollständige Buch
 
-Die GitHub-Version enthält die **Kapitel im Rohformat** (Markdown) zum Nachvollziehen und Lernen.
+**Hier auf GitHub: Alles lesbar. Kostenlos.**
 
-**Das fertige Buch bietet:**
-- Vollständig editiert & lektoriert
-- Hochwertige Fotos & Diagramme
+Die **Kapitel sind vollständig** im Rohformat (Markdown) zum Lesen und Lernen.
+
+**Das Buch bietet zusätzlich:**
+- Vollständig editiert & lektoriert (keine Tippfehler, schöner Fluss)
+- Hochwertige Fotos & Diagramme (Farbig!)
 - Zusätzliche Berechnungsbeispiele
-- Troubleshooting-Tipps
-- Leserfreundliches Layout
+- Troubleshooting-Tipps & Anhänge
+- Leserfreundliches Layout (Kindle/Print)
+- **Offline am Boot lesbar** (kein Internet nötig!)
 
-→ **Amazon KDP:** *(folgt bei Veröffentlichung)*
+→ **Amazon KDP:** *(~7€ Kindle, ~12€ Print)* – folgt 2025
+
+**Warum kaufen wenn's hier kostenlos ist?**
+
+Weil:
+1. Du das Projekt gut findest
+2. Weitere Bände unterstützen willst
+3. Lieber bequem auf Kindle/Papier liest
+4. "Danke" sagen möchtest
+
+**Aber:** Wenn GitHub reicht → alles gut! Hauptsache du lernst was! 😊
 
 ---
 
