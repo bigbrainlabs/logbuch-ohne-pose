@@ -1,4 +1,4 @@
-# Band X: Boot-Digitalisierung
+# Band 3: Boot-Digitalisierung
 
 **Von analogen VDO-Instrumenten zu MQTT & BoatOS**
 

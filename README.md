@@ -2,7 +2,7 @@
 
 **Authentische DIY-Projekte rund ums Boot – ohne Schönfärberei**
 
-> *"Keine perfekten Tutorials, sondern echte Lernreisen mit allen Höhen, Tiefen, Fehlern und Aha-Momenten."*
+> *„Keine perfekten Tutorials, sondern echte Lernreisen mit allen Höhen, Tiefen, Fehlern und Aha-Momenten."*
 
 Diese Repository-Serie dokumentiert praktische Boot-Projekte mit der ehrlichen Perspektive eines Bootseigentümers, der selbst Hand anlegt – inklusive aller Umwege, Fehleinschätzungen und improvisierten Lösungen.
 
@@ -10,10 +10,37 @@ Diese Repository-Serie dokumentiert praktische Boot-Projekte mit der ehrlichen P
 
 ## 📚 Die Buchreihe
 
+### Band 1: Der Motor läuft
+**Vom guten Boot zum Smart-Boat – eine Lernreise**
+
+*Status: ✅ Fertig geschrieben! (8/8 Kapitel, 19.000 Wörter)*
+
+Das Boot funktioniert. Motor läuft. Alles schwimmt.  
+Aber: Voltmeter zeigt immer 12.0V. Tankuhr zeigt immer 3/4.  
+Spoiler: Das nervt.
+
+**Was drin ist:**
+- Der Kauf (frisch lackiert, Motor läuft, Elektrik „gewachsen")
+- Die Erstinspektion (Kabel-Archäologie, 4 Jahrzehnte, 5 Schichten)
+- Der erste Sommer (funktioniert! Aber: Wackelkontakt-Heizung...)
+- Der erste Winter (Frustration, YouTube, 12 Tabs, 134€ Warenkorb)
+- Die Idee (Arduino IDE, „Hallo Welt!", ESP32, 8€ Hardware)
+- Das erste Projekt (LED-Beleuchtung... mit Rauch)
+- Die Vision (von „2 Projekte" zu „ALLES digitalisieren")
+- Der Motor läuft (Epilog: 3 Jahre später, BoatOS v2.4, Motor läuft immer noch)
+
+[→ Zum Band](band-1-der-motor-laeuft/)
+
+**Running Gag:** *"Der Motor läuft. Seit 1985. Immer."*
+
+**Launch:** März 2025
+
+---
+
 ### Band 2: Strom ist nie einfach
 **Solar, Batterien und die Realität der Autarkie**
 
-*Status: 📝 In Arbeit (6/8 Kapitel fertig)*
+*Status: 🔄 In Arbeit (6/8 Kapitel fertig)*
 
 280 Ah Akku. 260 Wp Solar. Das sollte reichen.  
 Spoiler: Kommt drauf an.
@@ -28,19 +55,14 @@ Spoiler: Kommt drauf an.
 
 [→ Zum Band](band-2-strom/)
 
-**Themen:**
-- Verbrauchsanalyse (mit echten Daten, nicht mit Prospekten)
-- Solar-Dimensionierung (Hoffnung vs. Realität)
-- Batterie-Management (LiFePO₄ im Alltag)
-- Praktische Lösungen (faltbare Panels, Gas, Routine)
-- Monitoring mit ESP32 (weil Raten nicht reicht)
+**Launch:** Mai 2025
 
 ---
 
-### Band X: Boot-Digitalisierung
-**Von analogen VDO-Instrumenten zu MQTT & BoatOS**
+### Band 3: Sensoren & Monitoring
+**ESP32, MQTT und die Digitalisierung der VDO-Geber**
 
-*Status: ⚙️ Hardware läuft, Software stabil, Buch in Planung*
+*Status: ✅ Dokumentation komplett, Buch in Planung*
 
 Drei handgelötete Platinen. Ein ESP32. Acht Sensoren.  
 Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
@@ -48,11 +70,10 @@ Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
 **Was entsteht:**
 - 8-Kanal Sensor-System (Batterien, Tank, Temp, Öl, RPM, Pitch, Roll)
 - MQTT-basierte Datenübertragung zum Raspberry Pi
-- BoatOS Dashboard mit Live-Widgets
-- SignalK Kompatibilität
+- Live-Dashboard mit allen Bootsdaten
 - VDO Instrumente bleiben als mechanisches Backup
 
-[→ Zum Projekt](band-x-monitoring/)
+[→ Zum Projekt](band-3-sensoren/)
 
 **Themen:**
 - ESP32 + ADS1115 + MPU6050 (I2C Debugging inklusive)
@@ -62,28 +83,111 @@ Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
 - Marine-Elektronik Basics (Spannungsteiler, Pull-ups, Bootsmasse)
 - Silikon-Verguss & 3D-Druck Gehäuse
 
+**Launch:** Juli 2025
+
+---
+
+### Band 4-5: BoatOS
+**Das komplette Boot-Betriebssystem**
+
+*Status: 💻 System läuft (v2.4), Buch-Arbeit 2025-2026*
+
+Nicht nur ein Dashboard. Ein komplettes Betriebssystem.  
+Mit eigener Navigation. Moderner UX. Voller Integration.
+
+**Das System:**
+- 🗺️ **Navigation** (eigene Implementierung, OpenSeaMap, GPS-Tracking)
+- 📊 **Dashboard** (alle Sensoren live: 8× ESP32, MQTT)
+- 🎮 **Steuerung** (Heizung, Licht, Pumpen, Alarme)
+- 🏠 **Home Assistant** (Smart Home fürs Boot)
+- 📱 **Mobile-First** (Tablet, Handy, Touch-optimiert)
+- 🌐 **WiFi Remote** (von überall auf dem Boot)
+
+**Technologie:**
+- Raspberry Pi 4 + Home Assistant OS
+- React Frontend (TypeScript, Leaflet, Tailwind)
+- Python Backend (FastAPI, MQTT, GPSd)
+- 8× ESP32 (Sensoren via MQTT)
+
+**➡️ Zum Projekt: [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)**
+
+**Kosten:**
+- Minimal: 110€ (Raspberry Pi, GPS, SD-Karte)
+- Empfohlen: 230€ (+ Display, Gehäuse)
+- Komplett: 524€ (+ 8× ESP32, Sensoren)
+- **vs. Raymarine Axiom 7: 2.300€** → Ersparnis: 1.776€!
+
+**Warum eigene Navigation?**
+- ❌ OpenCPN: zu komplex, nicht mobile-freundlich, veraltete UX
+- ✅ Eigene Lösung: modern, integriert, mobile-first
+
+**Launch Bücher:** Q4 2025 (Band 4), Q1 2026 (Band 5)
+
+---
+
+### Band 6: Die Ventil-Heizung
+**Wie ein Winterproblem zur Innovation wurde**
+
+*Status: 📋 Outline fertig, Prototyp läuft*
+
+3 Stunden mit Föhn am gefrorenen Ventil?  
+Oder 15 Minuten mit selbstgebauter Heizung?  
+Die Wahl ist klar.
+
+**Die Innovation:**
+- Clamshell-Heizmanschette (aufklappbar!)
+- ESP32 Temperatur-Regelung
+- 3D-druckbar (PETG)
+- 15 Minuten statt 3+ Stunden
+
+**Das Business-Modell:**
+- ✅ DIY: Kostenlos (STL, Code, Anleitung auf GitHub)
+- 💼 Firmen: Lizenz (500€/Jahr oder 5€/Stück)
+- 📜 Gebrauchsmuster (10 Jahre Schutz)
+
+**Die Story:**
+- Von Problem (gefroren!) zu Prototyp (schmilzt!) zu Lösung (funktioniert!)
+- Trial & Error dokumentiert (mit geschmolzenem Plastik)
+- Patent-Strategie (Gebrauchsmuster)
+- Open Source + Fair Licensing
+
+**Launch:** Q3 2025
+
 ---
 
 ## 🎯 Philosophie
 
-**"Logbuch ohne Pose" bedeutet:**
+**„Logbuch ohne Pose" bedeutet:**
 
 ✅ **Fehler werden gezeigt** – nicht versteckt  
 ✅ **Trial & Error** dokumentiert – mit allen Rückschlägen  
-✅ **Authentische Zeitangaben** – "drei Tage gebastelt" statt "kurze Einrichtung"  
+✅ **Authentische Zeitangaben** – „drei Tage gebastelt" statt „kurze Einrichtung"  
 ✅ **Realistische Kosten** – keine versteckten Ausgaben  
 ✅ **Improvisationen** – weil nicht alles nach Plan läuft  
-✅ **Lernkurven** – vom "sollte funktionieren" zum "funktioniert tatsächlich"
+✅ **Lernkurven** – vom „sollte funktionieren" zum „funktioniert tatsächlich"
 
 **Was du NICHT findest:**
+
 ❌ Perfekte Lösungen beim ersten Versuch  
-❌ "Einfach und schnell" wenn es kompliziert war  
+❌ „Einfach und schnell" wenn es kompliziert war  
 ❌ Werbeprospekt-Optimismus  
 ❌ Verschweigen von Problemen
 
 ---
 
-## 🛠️ Technologie-Stack (Band X - Monitoring)
+## 🛠️ Technologie-Stack
+
+### **Band 1 - Die Basics:**
+
+**Erste Schritte:**
+- Arduino IDE
+- ESP32 DevKit (8€)
+- Breadboard & Jumper Wires
+- Spannungsteiler (100kΩ + 47kΩ)
+- LED-Strips (12V)
+- OLED Display 0.96" (I2C)
+
+### **Band 3 - Monitoring System:**
 
 **Hardware:**
 - ESP32 WROOM-32 DevKit
@@ -98,183 +202,264 @@ Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
 - WiFiManager (Captive Portal)
 - PubSubClient (MQTT)
 - MQTT Broker (Mosquitto auf Raspberry Pi)
-- BoatOS Dashboard (Node-RED / React)
-- SignalK Server (optional)
 
-**Prinzipien:**
-- Open Source (MIT License)
-- Dokumentiert (Schaltpläne + Code)
-- Nachbaubar (Stückliste + Anleitung)
-- Erweiterbar (modular aufgebaut)
+### **Band 4-5 - BoatOS:**
 
----
+**Hardware:**
+- Raspberry Pi 4 (4GB)
+- 7" Touch Display
+- USB GPS-Modul
+- 8× ESP32 (Sensoren)
 
-## 📖 Für wen ist das?
+**Software:**
+- Home Assistant OS
+- React 18 + TypeScript (Frontend)
+- Python 3.11 + FastAPI (Backend)
+- Leaflet (Karten)
+- Mosquitto MQTT Broker
+- InfluxDB (optional, historische Daten)
 
-**Bootsbesitzer die:**
-- Selbst Hand anlegen wollen (statt Werft-Preise zu zahlen)
-- Technik-interessiert sind (aber keine Ingenieure sein müssen)
-- Authentische Erfahrungen schätzen (statt Marketing-Texte)
-- Mit Trial & Error klarkommen (und draus lernen wollen)
-- Realistische Zeit- und Kosteneinschätzungen suchen
+**➡️ Komplette Doku: [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)**
 
-**Du bist hier richtig wenn:**
-- "Sollte reichen" dir nicht reicht
-- Du wissen willst WAS auf deinem Boot passiert
-- Dich NMEA2000 Preise abschrecken
-- Du gerne bastelst (und auch mal fluchst)
-- "Open Source" keine Fremdsprache ist
+### **Band 6 - Ventil-Heizung:**
 
----
+**Hardware:**
+- ESP32 DevKit
+- PTC-Heizelement (60W, 12V)
+- DS18B20 Temperatur-Sensor
+- OLED Display 0.96"
+- 3D-gedrucktes Gehäuse (PETG)
 
-## 🤝 Community & Beitragen
-
-**Eigene Erfahrungen? Verbesserungen? Fehler gefunden?**
-
-→ **Issues** für Bugs, Fragen, Diskussionen  
-→ **Pull Requests** für Code-Verbesserungen, Korrekturen  
-→ **Discussions** für Projekt-Vorstellungen, Ideen
-
-**Du hast das Projekt nachgebaut?**  
-→ Zeig's uns! Fotos, Anpassungen, Learnings  
-→ Issues mit "Show & Tell" Label
-
-**Du hast eine Erweiterung gebaut?**  
-→ Heizungssteuerung? Bilgepumpen-Monitoring? Ankerwacht?  
-→ Pull Request mit deinem Projekt!
+**Software:**
+- Arduino IDE (C++)
+- Temperatur-Regelung (50-60°C)
+- Display-Anzeige (Live-Temperatur)
 
 ---
 
-## 📦 Repository-Struktur
+## 📖 Konzept
+
+**Open Source + Fair Licensing:**
+
+### **Für DIYer:**
+```
+✅ Alle Infos kostenlos (GitHub)
+✅ Hardware-Designs (STL, Schaltpläne)
+✅ Software (Code, Firmware)
+✅ Dokumentation (Anleitungen, BOMs)
+
+"Hier ist alles. Bau's nach!"
+```
+
+### **Für Firmen (Band 6 - Ventil-Heizung):**
+```
+💼 Kommerzielle Nutzung: Lizenz erforderlich
+💼 Option A: Jahres-Lizenz (500€)
+💼 Option B: Per-Unit (5€/Stück)
+📜 Geschützt durch Gebrauchsmuster
+
+"Willst du's verkaufen? Zahl fair!"
+```
+
+### **Für Leser:**
+```
+📚 Bücher = Die Story + Kontext
+📚 GitHub = Die Technik + Details
+📚 Beides zusammen = Vollständiges Bild
+
+"Verstehen UND Umsetzen!"
+```
+
+---
+
+## 🚀 Roadmap
+
+**2025:**
+- Q1: Band 1 Launch ✨
+- Q2: Band 2 Launch + Band 6 schreiben
+- Q3: Band 3 Launch + Band 6 Launch
+- Q4: Band 4 (BoatOS Teil 1) Launch
+
+**2026:**
+- Q1: Band 5 (BoatOS Teil 2) Launch
+- Q2-Q4: Weitere Projekte (Community-driven)
+
+**Langfristig:**
+- Band 7+: Weitere Innovationen
+- BoatOS Weiterentwicklung (AIS, Offline-Karten, Mobile App)
+- Community-Projekte
+- Hardware-Produkte (Ventil-Heizung, etc.)
+
+---
+
+## 📊 Status Overview
+
+```
+═══════════════════════════════════════════════
+BAND-ÜBERSICHT:
+───────────────────────────────────────────────
+Band 1:  ✅ Fertig (19.000 Wörter, alle 8 Kapitel)
+Band 2:  🔄 75% (6/8 Kapitel)
+Band 3:  ✅ Doku komplett
+Band 4:  💻 System läuft (v2.4)
+Band 5:  💻 System läuft (v2.4)
+Band 6:  📋 Outline fertig
+
+PROJEKTE:
+───────────────────────────────────────────────
+Monitoring:       ✅ Hardware läuft
+BoatOS:           ✅ v2.4 stabil
+Ventil-Heizung:   🔄 Prototyp V2 funktioniert
+
+LAUNCH-TIMELINE:
+───────────────────────────────────────────────
+März 2025:   Band 1 📚
+Mai 2025:    Band 2 📚
+Juli 2025:   Band 3 📚 + Band 6 📚
+Q4 2025:     Band 4 📚
+Q1 2026:     Band 5 📚
+```
+
+---
+
+## 📂 Repository-Struktur
 
 ```
 logbuch-ohne-pose/
-├── band-2-strom/              # Solar, Batterien, Energie
-│   ├── kapitel/              # Buch-Inhalte (Markdown)
-│   ├── berechnungen/         # Excel, Python Scripts
-│   ├── messungen/            # Echte Daten vom Boot
-│   └── fotos/
+├── README.md                    ← Diese Datei
+├── LICENSE
 │
-├── band-x-monitoring/         # ESP32 Sensor-System
-│   ├── hardware/             # Schaltpläne, STL-Files, BOM
-│   ├── firmware/             # Arduino Code
-│   ├── mqtt/                 # Topic-Struktur, Config
-│   ├── dashboard/            # BoatOS Integration
-│   └── docs/                 # Installation, Troubleshooting
+├── band-1-der-motor-laeuft/     ✅ KOMPLETT
+│   ├── README.md
+│   ├── OUTLINE.md
+│   ├── MARKETING.md
+│   └── kapitel/
+│       ├── 01-der-kauf.md
+│       ├── 02-erstinspektion.md
+│       ├── 03-erster-sommer.md
+│       ├── 04-erster-winter.md
+│       ├── 05-die-idee.md
+│       ├── 06-erstes-projekt.md
+│       ├── 07-die-vision.md
+│       └── 08-der-motor-laeuft.md
 │
-└── ressourcen/               # Gemeinsam genutzte Tools
+├── band-2-strom/                🔄 In Arbeit
+│   ├── README.md
+│   └── kapitel/
+│       ├── 01-erwartungen-vs-realitaet.md
+│       ├── 03-solar-hoffnung-grenzen.md
+│       ├── 05-fehlannahmen-katastrophen.md
+│       ├── 06-improvisieren.md
+│       ├── 07-messen-statt-raten.md
+│       └── 08-system-lernt-mit.md
+│
+├── band-3-sensoren/             ✅ Doku komplett
+│   ├── README.md
+│   ├── hardware/
+│   ├── firmware/
+│   └── docs/
+│
+└── Externe Repositories:
+    ├── BoatOS/                  ➡️ github.com/bigbrainlabs/BoatOS
+    └── Band 6 (geplant)         ➡️ Eigenes Repo für Hardware
 ```
 
 ---
 
-## 📄 Lizenz
+## 🔗 Links
 
-**Hardware & Schematics:** CC BY-SA 4.0  
-→ Frei nutzbar, veränderbar, teilbar (mit Namensnennung)
+**GitHub:**
+- **Hauptprojekt:** [github.com/bigbrainlabs/logbuch-ohne-pose](https://github.com/bigbrainlabs/logbuch-ohne-pose)
+- **BoatOS:** [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)
 
-**Software:** MIT License  
-→ Sehr permissive, auch kommerzielle Nutzung OK
-
-**Dokumentation & Texte:** CC BY-SA 4.0  
-→ Teilen und anpassen erlaubt
-
-**Buch-Inhalte:** © Copyright (nur zur Vorschau im Repo)
-
----
-
-## 📚 Bücher kaufen
-
-Die vollständigen Bücher mit allen Kapiteln, Fotos, Diagrammen und Hintergrund-Infos:
-
-→ **Band 2: Strom ist nie einfach** – [Amazon KDP](#) *(folgt)*  
-→ **Band X: Boot-Digitalisierung** – [Amazon KDP](#) *(in Planung)*
-
-**Warum kaufen wenn's auf GitHub ist?**
-- Vollständig editiert & lektoriert
-- Hochwertige Fotos & Diagramme
-- Zusätzliche Hintergrund-Infos
-- Unterstützt weitere Projekte
-- Schön formatiert zum Lesen (nicht nur Code)
-
----
-
-## 🔗 Links & Ressourcen
-
-**Bootsspezifisch:**
-- [SignalK](https://signalk.org/) – Open Source Marine Data Standard
-- [BoatOS](https://github.com/your-boatos-link) – Dashboard für Bootsdaten
-- [OpenCPN](https://opencpn.org/) – Navigation Software
-
-**Hardware:**
-- [ADS1115 Datasheet](https://www.ti.com/product/ADS1115)
-- [MPU6050 Datasheet](https://invensense.tdk.com/products/motion-tracking/6-axis/mpu-6050/)
-- [ESP32 Documentation](https://docs.espressif.com/)
+**Bücher:**
+- Amazon KDP (ab März 2025)
+- Band 1-6 geplant
 
 **Community:**
-- [Cruisers Forum](https://www.cruisersforum.com/) – DIY Marine Electronics
-- [Reddit r/boatbuilding](https://reddit.com/r/boatbuilding)
+- GitHub Discussions (bevorzugt!)
+- GitHub Issues (für Bugs/Features)
 
 ---
 
-## ⚓ Status & Roadmap
+## 🤝 Mitmachen
 
-**Aktuell:**
-- ✅ Band 2 (Strom): 6/8 Kapitel geschrieben
-- ✅ Monitoring Hardware: Funktioniert, im Einsatz
-- ✅ Monitoring Software: Stabil, OTA-Updates laufen
-- 🔄 3D-Gehäuse: In Planung
-- 🔄 Boot-Installation: Vorbereitung läuft
+**Community Contributions willkommen!**
 
-**Nächste Schritte:**
-- Band 2 Kapitel 7 & 8 fertigstellen
-- Monitoring auf Boot installieren (mit echten VDO Sensoren)
-- Kalibrierung & Feintuning
-- Fotos & Dokumentation vervollständigen
-- Buch-Veröffentlichung vorbereiten
-
-**Geplant:**
-- Band 3: Weitere Boot-Projekte
-- Erweiterungs-Module (Heizung, Bilgepumpen, etc.)
-- Community-Beiträge integrieren
+**Du kannst helfen mit:**
+- 🐛 **Bug Reports** (GitHub Issues)
+- 💡 **Feature Ideas** (GitHub Discussions)
+- 📝 **Dokumentation** (PRs willkommen!)
+- 🔧 **Code** (Frontend, Backend, Firmware)
+- 📚 **Beta-Reading** (Bücher Korrektur lesen)
+- 🎨 **Design** (UI/UX für BoatOS)
 
 ---
 
-## 💬 Kontakt & Feedback
+## 📜 Lizenz
 
-**Fragen? Anregungen? Probleme?**
+**Code & Hardware:**
+- MIT License (frei nutzbar, modifizierbar, verteilbar)
 
-→ [GitHub Issues](../../issues) – Für technische Fragen  
-→ [GitHub Discussions](../../discussions) – Für allgemeine Diskussionen  
-→ Email: *[deine-email@example.com]* – Für direkten Kontakt
+**Bücher:**
+- Copyright (aber GitHub-Inhalte bleiben open!)
 
-**Folgen & Updates:**
-- GitHub: Star & Watch dieses Repo
-- *[Optional: Blog, YouTube, etc.]*
-
----
-
-## ⭐ Support / Buch kaufen
-
-**Hier ist alles. Wenn's dir hilft, kauf das Buch. Wenn nicht, auch OK.** 🤷‍♂️
-
-Alle Inhalte sind frei verfügbar auf GitHub. Die Bücher gibt's für die, die:
-- ✅ Das Projekt gut finden und danke sagen wollen
-- ✅ Lieber auf Kindle/gedruckt lesen (am Boot kein Internet!)
-- ✅ Schön editiert & lektoriert haben wollen
-- ✅ Weitere Projekte unterstützen möchten
-
-**Die Bücher:**
-→ **Band 2: Strom ist nie einfach** – [Amazon KDP](#) *(~7€ Kindle, ~12€ Print)* – folgt 2025  
-→ **Band X: Boot-Digitalisierung** – [Amazon KDP](#) *(~7€ Kindle, ~12€ Print)* – in Planung
-
-**Andere Wege zu helfen:**
-→ ⭐ **Star** auf GitHub – Hilft anderen es zu finden  
-→ 🔀 **Fork & Erweitern** – Bau deine eigene Version  
-→ 💬 **Teilen** – Erzähl anderen davon  
-→ 🐛 **Issues melden** – Fehler gefunden? Sag Bescheid!
+**Ventil-Heizung (Band 6):**
+- DIY: CC BY-NC-SA (kostenlos für non-commercial)
+- Commercial: Lizenz erforderlich
+- Gebrauchsmuster: 10 Jahre Schutz
 
 ---
 
-**Made with ⚓ and many ☕**
+## 🙏 Credits
 
-*"Hier ist alles. Open Source heißt: Du darfst damit machen was du willst. Auch nichts kaufen. Auch das ist OK."*
+**Inspiriert von:**
+- Der DIY-Marine-Community
+- YouTube-Tutorial-Erstellern
+- Allen die teilen statt verkaufen
+
+**Technologie:**
+- Home Assistant
+- OpenSeaMap
+- SignalK
+- ESP32/Arduino Community
+
+---
+
+## 📧 Kontakt
+
+**Fragen? Ideen? Feedback?**
+
+- 💬 GitHub Discussions (bevorzugt!)
+- 🐛 GitHub Issues (für Bugs)
+- 📧 Email: [deine email hier]
+
+---
+
+## ⚓ Über das Projekt
+
+**„Logbuch ohne Pose" entstand aus Frustration.**
+
+Frustration über:
+- Tutorial-Videos die Probleme verschweigen
+- „Einfache" Anleitungen die kompliziert sind
+- Projekte die „in 2 Stunden" doch 2 Tage dauern
+- Versteckte Kosten
+- Fehlende Ehrlichkeit
+
+**„Logbuch ohne Pose" ist anders:**
+
+✅ Ehrlich über Fehler  
+✅ Realistisch über Zeit  
+✅ Transparent über Kosten  
+✅ Authentisch über Probleme  
+
+**Keine Pose. Nur Wahrheit.**
+
+---
+
+**Letzte Aktualisierung:** 25. Januar 2025
+
+*„Der Motor läuft. Die Projekte auch. Die Bücher entstehen. Die Community wächst."*
+
+**Los geht's! 🚀**
