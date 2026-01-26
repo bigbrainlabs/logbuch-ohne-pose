@@ -33,7 +33,7 @@ Spoiler: Das nervt.
 
 **Running Gag:** *"Der Motor läuft. Seit 1985. Immer."*
 
-**Launch:** März 2025
+**Launch:** Februar 2026
 
 ---
 
@@ -55,7 +55,7 @@ Spoiler: Kommt drauf an.
 
 [→ Zum Band](band-2-strom/)
 
-**Launch:** Mai 2025
+**Launch:** Februar 2026
 
 ---
 
@@ -83,14 +83,14 @@ Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
 - Marine-Elektronik Basics (Spannungsteiler, Pull-ups, Bootsmasse)
 - Silikon-Verguss & 3D-Druck Gehäuse
 
-**Launch:** Juli 2025
+**Launch:** Q2 2026
 
 ---
 
 ### Band 4-5: BoatOS
 **Das komplette Boot-Betriebssystem**
 
-*Status: 💻 System läuft (v2.4), Buch-Arbeit 2025-2026*
+*Status: 💻 System läuft (v2.4), Buch-Arbeit 2026*
 
 Nicht nur ein Dashboard. Ein komplettes Betriebssystem.  
 Mit eigener Navigation. Moderner UX. Voller Integration.
@@ -121,7 +121,7 @@ Mit eigener Navigation. Moderner UX. Voller Integration.
 - ❌ OpenCPN: zu komplex, nicht mobile-freundlich, veraltete UX
 - ✅ Eigene Lösung: modern, integriert, mobile-first
 
-**Launch Bücher:** Q4 2025 (Band 4), Q1 2026 (Band 5)
+**Launch Bücher:** Q3 2026 (Band 4), Q4 2026 (Band 5)
 
 ---
 
@@ -151,7 +151,40 @@ Die Wahl ist klar.
 - Patent-Strategie (Gebrauchsmuster)
 - Open Source + Fair Licensing
 
-**Launch:** Q3 2025
+**Launch:** Q2 2026
+
+---
+
+### Band 7: Die Auto-Sat
+**Weil automatisch cooler ist**
+
+*Status: 📋 Outline fertig, Prototyp in Arbeit*
+
+2 Minuten manuell ausrichten?  
+Oder 6 Monate eine Automatik bauen?  
+"WEIL ICH'S KANN!"
+
+**Die Innovation:**
+- Automatische Sat-Schüssel-Ausrichtung
+- ESP32 + GPS + 2× Schrittmotoren
+- Schneckengetriebe 1:40 (selbsthemmend!)
+- Knopfdruck → Signal → TV läuft
+
+**Die Kosten:**
+- DIY: <150€
+- Fertig kaufen: 900€ - 3.500€
+- Ersparnis: 750€ - 3.350€!
+
+**Die Story:**
+- Von "Wie schwer kann das sein?" zu "ES FUNKTIONIERT!"
+- Mechanik-Albtraum (Schneckengetriebe!)
+- Trigonometrie schmerzt (GPS → Azimut/Elevation)
+- Epic Fail (5° daneben!)
+- Endschalter retten alles
+- BoatOS Integration
+- **"WEIL ICH'S KANN. WEIL'S JEDER KANN!"**
+
+**Launch:** Q3 2026
 
 ---
 
@@ -235,6 +268,26 @@ Die Wahl ist klar.
 - Temperatur-Regelung (50-60°C)
 - Display-Anzeige (Live-Temperatur)
 
+### **Band 7 - Auto-Sat:**
+
+**Hardware:**
+- ESP32 DevKit
+- GPS-Modul (mit ext. Antenne)
+- 2× NEMA17 Schrittmotor
+- 2× A4988 Stepper-Driver
+- Schneckengetriebe 1:40
+- Rillenkugellager 6000-2RS
+- D-Shaft Wellen
+- Schleifring
+- 2× Endschalter
+
+**Software:**
+- Arduino IDE (C++)
+- AccelStepper Library
+- TinyGPS++ (GPS)
+- Trigonometrie (Satellitenwinkel)
+- MQTT Integration
+
 ---
 
 ## 📖 Konzept
@@ -274,21 +327,20 @@ Die Wahl ist klar.
 
 ## 🚀 Roadmap
 
-**2025:**
-- Q1: Band 1 Launch ✨
-- Q2: Band 2 Launch + Band 6 schreiben
-- Q3: Band 3 Launch + Band 6 Launch
-- Q4: Band 4 (BoatOS Teil 1) Launch
-
 **2026:**
-- Q1: Band 5 (BoatOS Teil 2) Launch
-- Q2-Q4: Weitere Projekte (Community-driven)
+- Q1: Band 1 + 2 Launch ✨
+- Q2: Band 3 + 6 Launch
+- Q3: Band 4 + 7 Launch
+- Q4: Band 5 Launch
+
+**2027:**
+- Q1+: Weitere Projekte (Community-driven)
 
 **Langfristig:**
-- Band 7+: Weitere Innovationen
+- Band 8+: Weitere Innovationen
 - BoatOS Weiterentwicklung (AIS, Offline-Karten, Mobile App)
 - Community-Projekte
-- Hardware-Produkte (Ventil-Heizung, etc.)
+- Hardware-Produkte (Ventil-Heizung, Auto-Sat, etc.)
 
 ---
 
@@ -304,20 +356,21 @@ Band 3:  ✅ Doku komplett
 Band 4:  💻 System läuft (v2.4)
 Band 5:  💻 System läuft (v2.4)
 Band 6:  📋 Outline fertig
+Band 7:  📋 Outline fertig
 
 PROJEKTE:
 ───────────────────────────────────────────────
 Monitoring:       ✅ Hardware läuft
 BoatOS:           ✅ v2.4 stabil
 Ventil-Heizung:   🔄 Prototyp V2 funktioniert
+Auto-Sat:         🔄 Prototyp in Arbeit
 
 LAUNCH-TIMELINE:
 ───────────────────────────────────────────────
-März 2025:   Band 1 📚
-Mai 2025:    Band 2 📚
-Juli 2025:   Band 3 📚 + Band 6 📚
-Q4 2025:     Band 4 📚
-Q1 2026:     Band 5 📚
+Februar 2026:   Band 1 + 2 📚
+Q2 2026:        Band 3 + 6 📚
+Q3 2026:        Band 4 + 7 📚
+Q4 2026:        Band 5 📚
 ```
 
 ---
@@ -361,7 +414,8 @@ logbuch-ohne-pose/
 │
 └── Externe Repositories:
     ├── BoatOS/                  ➡️ github.com/bigbrainlabs/BoatOS
-    └── Band 6 (geplant)         ➡️ Eigenes Repo für Hardware
+    ├── Band 6 (geplant)         ➡️ Eigenes Repo für Hardware
+    └── Band 7 (geplant)         ➡️ Eigenes Repo für Hardware
 ```
 
 ---
@@ -373,8 +427,8 @@ logbuch-ohne-pose/
 - **BoatOS:** [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)
 
 **Bücher:**
-- Amazon KDP (ab März 2025)
-- Band 1-6 geplant
+- Amazon KDP (ab Februar 2026)
+- Band 1-7 geplant
 
 **Community:**
 - GitHub Discussions (bevorzugt!)
@@ -458,7 +512,7 @@ Frustration über:
 
 ---
 
-**Letzte Aktualisierung:** 25. Januar 2025
+**Letzte Aktualisierung:** 25. Januar 2026
 
 *„Der Motor läuft. Die Projekte auch. Die Bücher entstehen. Die Community wächst."*
 

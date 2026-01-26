@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Power Board - Detaillierte Verdrahtung</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 18px;
+        }
+        .warning-box {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 16px;
+        }
+        .parts-list {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .parts-list h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .part-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .part-item strong {
+            color: #667eea;
+        }
+        .diagram-container {
+            background: #2c3e50;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        .step-container {
+            margin: 40px 0;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 6px solid #667eea;
+        }
+        .step h3 {
+            color: #667eea;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .wire-info {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .wire-info strong {
+            color: #856404;
+        }
+        .connection-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .connection-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+        .connection-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .connection-table tr:last-child td {
+            border-bottom: none;
+        }
+        .connection-table tr:hover {
+            background: #f8f9fa;
+        }
+        .color-red { color: #e74c3c; font-weight: bold; }
+        .color-black { color: #2c3e50; font-weight: bold; }
+        .color-blue { color: #3498db; font-weight: bold; }
+        .color-green { color: #2ecc71; font-weight: bold; }
+        .color-yellow { color: #f39c12; font-weight: bold; }
+        
+        .tip-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .tip-box h4 {
+            color: #155724;
+            margin-bottom: 10px;
+        }
+        
+        svg {
+            display: block;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ POWER BOARD - Detaillierte Verdrahtung</h1>
+        <div class="subtitle">Schritt-für-Schritt Anleitung mit exakten Verbindungen</div>
+        
+        <div class="warning-box">
+            ⚠️ WICHTIG: Vor dem Löten alle Verbindungen mit Durchgangsprüfer testen! ⚠️
+        </div>
+
+        <!-- Parts List -->
+        <div class="parts-list">
+            <h2>📦 Benötigte Bauteile</h2>
+            <div class="parts-grid">
+                <div class="part-item">
+                    <strong>Platine:</strong><br>
+                    1x Lochrasterplatine 50x46mm (ca. 19x17 Löcher)
+                </div>
+                <div class="part-item">
+                    <strong>Spannungsregler:</strong><br>
+                    1x AMS1117-3.3V Breakout-Modul
+                </div>
+                <div class="part-item">
+                    <strong>Elektrolytkondensatoren:</strong><br>
+                    2x 100µF / 16V (radial, RM 2,5mm)
+                </div>
+                <div class="part-item">
+                    <strong>Keramikkondensatoren:</strong><br>
+                    2x 100nF / 50V (RM 5mm oder SMD)
+                </div>
+                <div class="part-item">
+                    <strong>Stiftleisten:</strong><br>
+                    2x Stiftleiste 2x3 Pin (2,54mm)<br>
+                    oder Schraubklemmen
+                </div>
+                <div class="part-item">
+                    <strong>Draht:</strong><br>
+                    Schaltdraht 0,6-0,8mm (Kupfer verzinnt)<br>
+                    Rot = +5V, Schwarz = GND, Grün = 3.3V
+                </div>
+            </div>
+        </div>
+
+        <!-- Schematic Overview -->
+        <div class="diagram-container">
+            <svg width="1200" height="800" viewBox="0 0 1200 800">
+                <!-- Title -->
+                <text x="600" y="40" fill="white" font-size="28" text-anchor="middle" font-weight="bold">
+                    POWER BOARD - Verdrahtungsübersicht
+                </text>
+                
+                <!-- Grid Background -->
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="10" cy="10" r="1" fill="#555" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect x="50" y="70" width="1100" height="700" fill="#2c3e50" stroke="#ffd700" stroke-width="3" rx="10"/>
+                <rect x="50" y="70" width="1100" height="700" fill="url(#grid)"/>
+                
+                <!-- USB Input Connector -->
+                <g id="usb-input">
+                    <rect x="100" y="150" width="140" height="100" fill="#333" stroke="#ffd700" stroke-width="4" rx="8"/>
+                    <text x="170" y="130" fill="#ff4500" font-size="20" text-anchor="middle" font-weight="bold">USB 5V EINGANG</text>
+                    <text x="170" y="190" fill="white" font-size="16" text-anchor="middle">12V→5V USB</text>
+                    <text x="170" y="210" fill="#ffd700" font-size="14" text-anchor="middle">Wandler</text>
+                    
+                    <!-- Pins -->
+                    <circle cx="130" cy="170" r="8" fill="#ff4500"/>
+                    <text x="130" y="155" fill="#ff4500" font-size="14" text-anchor="middle" font-weight="bold">+5V</text>
+                    <text x="100" y="175" fill="white" font-size="12" text-anchor="end">①</text>
+                    
+                    <circle cx="210" cy="170" r="8" fill="#0066ff"/>
+                    <text x="210" y="155" fill="#0066ff" font-size="14" text-anchor="middle" font-weight="bold">GND</text>
+                    <text x="240" y="175" fill="white" font-size="12">②</text>
+                </g>
+                
+                <!-- Input Cap 100µF -->
+                <g id="cap-100uf-in">
+                    <circle cx="320" cy="200" r="30" fill="#4169e1" stroke="#ffd700" stroke-width="3"/>
+                    <line x1="320" y1="180" x2="320" y2="220" stroke="white" stroke-width="3"/>
+                    <text x="320" y="165" fill="white" font-size="16" text-anchor="middle" font-weight="bold">C1</text>
+                    <text x="320" y="150" fill="#ffd700" font-size="14" text-anchor="middle">100µF</text>
+                    <text x="320" y="260" fill="white" font-size="12" text-anchor="middle">16V</text>
+                    <circle cx="320" cy="180" r="6" fill="#ff4500"/>
+                    <text x="295" y="183" fill="white" font-size="12" text-anchor="end">③</text>
+                    <circle cx="320" cy="220" r="6" fill="#0066ff"/>
+                    <text x="295" y="223" fill="white" font-size="12" text-anchor="end">④</text>
+                </g>
+                
+                <!-- Input Cap 100nF -->
+                <g id="cap-100nf-in">
+                    <rect x="395" y="190" width="30" height="20" fill="#d2691e" stroke="#ffd700" stroke-width="3"/>
+                    <text x="410" y="175" fill="white" font-size="16" text-anchor="middle" font-weight="bold">C2</text>
+                    <text x="410" y="160" fill="#ffd700" font-size="14" text-anchor="middle">100nF</text>
+                    <circle cx="410" cy="190" r="6" fill="#ff4500"/>
+                    <text x="385" y="193" fill="white" font-size="12" text-anchor="end">⑤</text>
+                    <circle cx="410" cy="210" r="6" fill="#0066ff"/>
+                    <text x="385" y="213" fill="white" font-size="12" text-anchor="end">⑥</text>
+                </g>
+                
+                <!-- +5V BUS -->
+                <line x1="130" y1="170" x2="1000" y2="170" stroke="#ff4500" stroke-width="10"/>
+                <text x="600" y="155" fill="#ff4500" font-size="18" text-anchor="middle" font-weight="bold">+5V BUS (dicker Draht 0,8mm)</text>
+                <circle cx="320" cy="170" r="5" fill="#ff4500"/>
+                <circle cx="410" cy="170" r="5" fill="#ff4500"/>
+                <circle cx="600" cy="170" r="5" fill="#ff4500"/>
+                
+                <!-- GND BUS -->
+                <line x1="130" y1="330" x2="1000" y2="330" stroke="#0066ff" stroke-width="10"/>
+                <text x="600" y="355" fill="#0066ff" font-size="18" text-anchor="middle" font-weight="bold">GND BUS (dicker Draht 0,8mm)</text>
+                <circle cx="210" cy="330" r="5" fill="#0066ff"/>
+                <circle cx="320" cy="330" r="5" fill="#0066ff"/>
+                <circle cx="410" cy="330" r="5" fill="#0066ff"/>
+                <circle cx="670" cy="330" r="5" fill="#0066ff"/>
+                
+                <!-- Connections USB to Buses -->
+                <line x1="130" y1="178" x2="130" y2="170" stroke="#ff4500" stroke-width="4"/>
+                <line x1="210" y1="178" x2="210" y2="250" stroke="#0066ff" stroke-width="4"/>
+                <line x1="210" y1="250" x2="210" y2="330" stroke="#0066ff" stroke-width="4" stroke-dasharray="5,5"/>
+                
+                <!-- Cap connections -->
+                <line x1="320" y1="220" x2="320" y2="280" stroke="#0066ff" stroke-width="3"/>
+                <line x1="320" y1="280" x2="320" y2="330" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <line x1="410" y1="210" x2="410" y2="280" stroke="#0066ff" stroke-width="3"/>
+                <line x1="410" y1="280" x2="410" y2="330" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <!-- AMS1117 Module -->
+                <g id="ams1117">
+                    <rect x="550" y="420" width="240" height="140" fill="#20b2aa" stroke="#ffd700" stroke-width="5" rx="10"/>
+                    <text x="670" y="470" fill="white" font-size="24" text-anchor="middle" font-weight="bold">AMS1117-3.3V</text>
+                    <text x="670" y="495" fill="white" font-size="16" text-anchor="middle">Spannungsregler</text>
+                    <text x="670" y="520" fill="#ffd700" font-size="14" text-anchor="middle">Breakout Board</text>
+                    
+                    <!-- Pins labeled -->
+                    <circle cx="570" cy="450" r="10" fill="#ff4500"/>
+                    <text x="570" y="430" fill="#ff4500" font-size="16" text-anchor="middle" font-weight="bold">VIN</text>
+                    <text x="545" y="455" fill="white" font-size="14" text-anchor="end">⑦</text>
+                    
+                    <circle cx="670" cy="545" r="10" fill="#0066ff"/>
+                    <text x="670" y="575" fill="#0066ff" font-size="16" text-anchor="middle" font-weight="bold">GND</text>
+                    <text x="640" y="550" fill="white" font-size="14" text-anchor="end">⑧</text>
+                    
+                    <circle cx="770" cy="450" r="10" fill="#2ecc71"/>
+                    <text x="770" y="430" fill="#2ecc71" font-size="16" text-anchor="middle" font-weight="bold">VOUT</text>
+                    <text x="800" y="455" fill="white" font-size="14">⑨</text>
+                </g>
+                
+                <!-- Connections to AMS1117 -->
+                <line x1="600" y1="170" x2="570" y2="440" stroke="#ff4500" stroke-width="4"/>
+                <line x1="670" y1="555" x2="670" y2="330" stroke="#0066ff" stroke-width="4"/>
+                
+                <!-- Output Caps -->
+                <g id="cap-100uf-out">
+                    <circle cx="870" cy="490" r="30" fill="#4169e1" stroke="#ffd700" stroke-width="3"/>
+                    <line x1="870" y1="470" x2="870" y2="510" stroke="white" stroke-width="3"/>
+                    <text x="870" y="455" fill="white" font-size="16" text-anchor="middle" font-weight="bold">C3</text>
+                    <text x="870" y="440" fill="#ffd700" font-size="14" text-anchor="middle">100µF</text>
+                    <text x="870" y="550" fill="white" font-size="12" text-anchor="middle">16V</text>
+                    <circle cx="870" cy="470" r="6" fill="#2ecc71"/>
+                    <text x="845" y="473" fill="white" font-size="12" text-anchor="end">⑩</text>
+                    <circle cx="870" cy="510" r="6" fill="#0066ff"/>
+                    <text x="845" y="513" fill="white" font-size="12" text-anchor="end">⑪</text>
+                </g>
+                
+                <g id="cap-100nf-out">
+                    <rect x="945" y="480" width="30" height="20" fill="#d2691e" stroke="#ffd700" stroke-width="3"/>
+                    <text x="960" y="465" fill="white" font-size="16" text-anchor="middle" font-weight="bold">C4</text>
+                    <text x="960" y="450" fill="#ffd700" font-size="14" text-anchor="middle">100nF</text>
+                    <circle cx="960" cy="480" r="6" fill="#2ecc71"/>
+                    <text x="935" y="483" fill="white" font-size="12" text-anchor="end">⑫</text>
+                    <circle cx="960" cy="500" r="6" fill="#0066ff"/>
+                    <text x="935" y="503" fill="white" font-size="12" text-anchor="end">⑬</text>
+                </g>
+                
+                <!-- +3.3V BUS -->
+                <line x1="770" y1="450" x2="1000" y2="450" stroke="#2ecc71" stroke-width="8"/>
+                <text x="885" y="435" fill="#2ecc71" font-size="16" text-anchor="middle" font-weight="bold">+3.3V BUS</text>
+                <circle cx="870" cy="450" r="5" fill="#2ecc71"/>
+                <circle cx="960" cy="450" r="5" fill="#2ecc71"/>
+                
+                <!-- Output cap connections -->
+                <line x1="870" y1="470" x2="870" y2="450" stroke="#2ecc71" stroke-width="3"/>
+                <line x1="960" y1="480" x2="960" y2="450" stroke="#2ecc71" stroke-width="3"/>
+                
+                <line x1="870" y1="510" x2="870" y2="580" stroke="#0066ff" stroke-width="3"/>
+                <line x1="870" y1="580" x2="670" y2="580" stroke="#0066ff" stroke-width="3"/>
+                <line x1="670" y1="580" x2="670" y2="555" stroke="#0066ff" stroke-width="3"/>
+                
+                <line x1="960" y1="500" x2="960" y2="580" stroke="#0066ff" stroke-width="3"/>
+                <line x1="960" y1="580" x2="870" y2="580" stroke="#0066ff" stroke-width="3"/>
+                
+                <!-- Output Connectors -->
+                <g id="output-5v">
+                    <rect x="150" y="650" width="120" height="90" fill="#444" stroke="#ff4500" stroke-width="4" rx="8"/>
+                    <text x="210" y="635" fill="#ff4500" font-size="18" text-anchor="middle" font-weight="bold">5V AUSGANG</text>
+                    <text x="210" y="685" fill="white" font-size="14" text-anchor="middle">→ SENSOR BOARD</text>
+                    <circle cx="180" cy="710" r="8" fill="#ff4500"/>
+                    <text x="195" y="715" fill="#ffd700" font-size="12">+5V</text>
+                    <text x="155" y="715" fill="white" font-size="12" text-anchor="end">⑭</text>
+                    <circle cx="240" cy="710" r="8" fill="#0066ff"/>
+                    <text x="255" y="715" fill="#ffd700" font-size="12">GND</text>
+                    <text x="265" y="715" fill="white" font-size="12">⑮</text>
+                </g>
+                
+                <g id="output-3v3">
+                    <rect x="930" y="650" width="120" height="90" fill="#444" stroke="#2ecc71" stroke-width="4" rx="8"/>
+                    <text x="990" y="635" fill="#2ecc71" font-size="18" text-anchor="middle" font-weight="bold">3.3V AUSGANG</text>
+                    <text x="990" y="685" fill="white" font-size="14" text-anchor="middle">→ MAIN BOARD</text>
+                    <circle cx="960" cy="710" r="8" fill="#2ecc71"/>
+                    <text x="975" y="715" fill="#ffd700" font-size="12">+3.3V</text>
+                    <text x="935" y="715" fill="white" font-size="12" text-anchor="end">⑯</text>
+                    <circle cx="1020" cy="710" r="8" fill="#0066ff"/>
+                    <text x="1035" y="715" fill="#ffd700" font-size="12">GND</text>
+                    <text x="1045" y="715" fill="white" font-size="12">⑰</text>
+                </g>
+                
+                <!-- Connections to outputs -->
+                <line x1="180" y1="702" x2="180" y2="600" stroke="#ff4500" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="180" y1="600" x2="130" y2="600" stroke="#ff4500" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="130" y1="600" x2="130" y2="170" stroke="#ff4500" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <line x1="240" y1="702" x2="240" y2="600" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="240" y1="600" x2="210" y2="600" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="210" y1="600" x2="210" y2="330" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <line x1="960" y1="702" x2="960" y2="620" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="960" y1="620" x2="960" y2="450" stroke="#2ecc71" stroke-width="3" stroke-dasharray="5,5"/>
+                
+                <line x1="1020" y1="702" x2="1020" y2="620" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="1020" y1="620" x2="960" y2="620" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+                <line x1="960" y1="620" x2="960" y2="580" stroke="#0066ff" stroke-width="3" stroke-dasharray="5,5"/>
+            </svg>
+        </div>
+
+        <!-- Step by Step Instructions -->
+        <div class="step-container">
+            <h2 style="color: #667eea; font-size: 28px; margin-bottom: 20px;">🔧 Schritt-für-Schritt Aufbau</h2>
+            
+            <!-- Step 1 -->
+            <div class="step">
+                <h3><span class="step-number">1</span>Platine vorbereiten</h3>
+                <p>Lochrasterplatine auf 50x46mm zuschneiden (ca. 19x17 Löcher). Kanten entgraten und mit Schmirgelpapier glätten.</p>
+                <div class="tip-box">
+                    <h4>💡 Tipp:</h4>
+                    Platine vor dem Löten mit Isopropanol reinigen für bessere Lötstellen!
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="step">
+                <h3><span class="step-number">2</span>Busse verlegen (ZUERST!)</h3>
+                <p><strong>Das ist die Basis - hier muss alles stabil sein!</strong></p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Bus</th>
+                        <th>Draht</th>
+                        <th>Dicke</th>
+                        <th>Verlauf</th>
+                    </tr>
+                    <tr>
+                        <td class="color-red">+5V BUS</td>
+                        <td class="color-red">ROTEN Draht</td>
+                        <td>0,8mm oder dicker</td>
+                        <td>Horizontal in der oberen Hälfte, ca. 1/3 von oben</td>
+                    </tr>
+                    <tr>
+                        <td class="color-blue">GND BUS</td>
+                        <td class="color-black">SCHWARZEN Draht</td>
+                        <td>0,8mm oder dicker</td>
+                        <td>Horizontal in der Mitte, ca. 2/3 von oben</td>
+                    </tr>
+                    <tr>
+                        <td class="color-green">+3.3V BUS</td>
+                        <td class="color-green">GRÜNEN Draht</td>
+                        <td>0,6mm reicht</td>
+                        <td>Horizontal rechts neben AMS1117, untere Hälfte</td>
+                    </tr>
+                </table>
+                
+                <div class="wire-info">
+                    <strong>Wichtig:</strong> Die Busse müssen stabil auf der Platine aufliegen. Mit kleinen Drahtbrücken an mehreren Stellen festlöten (alle 10-15 Löcher eine Brücke nach unten).
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="step">
+                <h3><span class="step-number">3</span>USB-Eingang montieren (links oben)</h3>
+                <p>Stiftleiste 1x2 oder Schraubklemme für USB 12V→5V Wandler.</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Position</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>①</strong> USB +5V</td>
+                        <td>Linker Pin der Stiftleiste</td>
+                        <td class="color-red">→ Direkt an +5V BUS löten</td>
+                    </tr>
+                    <tr>
+                        <td><strong>②</strong> USB GND</td>
+                        <td>Rechter Pin der Stiftleiste</td>
+                        <td class="color-blue">→ Kurzer Draht zu GND BUS</td>
+                    </tr>
+                </table>
+                
+                <div class="tip-box">
+                    <h4>💡 Layout-Tipp:</h4>
+                    USB-Eingang ca. 5 Löcher vom linken Rand, 3-4 Löcher vom oberen Rand positionieren.
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div class="step">
+                <h3><span class="step-number">4</span>Eingangskondensatoren (direkt neben USB)</h3>
+                <p><strong>C1 (100µF):</strong> 2-3cm rechts vom USB-Eingang</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Bauteil</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>③</strong> C1 Plus</td>
+                        <td>100µF Elektrolyt (langes Bein = Plus!)</td>
+                        <td class="color-red">→ An +5V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>④</strong> C1 Minus</td>
+                        <td>Kurzes Bein mit Streifen</td>
+                        <td class="color-blue">→ An GND BUS</td>
+                    </tr>
+                </table>
+                
+                <p style="margin-top: 20px;"><strong>C2 (100nF):</strong> Direkt neben C1</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Bauteil</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑤</strong> C2 Bein 1</td>
+                        <td>100nF Keramik (unpolar)</td>
+                        <td class="color-red">→ An +5V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑥</strong> C2 Bein 2</td>
+                        <td>Egal welches Bein</td>
+                        <td class="color-blue">→ An GND BUS</td>
+                    </tr>
+                </table>
+                
+                <div class="wire-info">
+                    <strong>Achtung Polung!</strong> Elektrolytkondensatoren haben eine Markierung (Streifen mit Minus-Zeichen) auf der Minus-Seite. Falsche Polung → Kondensator explodiert! 💥
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div class="step">
+                <h3><span class="step-number">5</span>AMS1117 Breakout Board montieren (Mitte-Rechts)</h3>
+                <p>Der Spannungsregler ist das Herzstück! Er wird warm, daher etwas Abstand zu anderen Bauteilen lassen.</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>AMS1117 Pin</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑦</strong> VIN</td>
+                        <td>Eingang (meist links)</td>
+                        <td class="color-red">→ Mit Draht (0,6mm) an +5V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑧</strong> GND</td>
+                        <td>Masse (meist Mitte)</td>
+                        <td class="color-blue">→ Mit Draht an GND BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑨</strong> VOUT</td>
+                        <td>Ausgang 3,3V (meist rechts)</td>
+                        <td class="color-green">→ Start des +3.3V BUS</td>
+                    </tr>
+                </table>
+                
+                <div class="tip-box">
+                    <h4>💡 Layout-Tipp:</h4>
+                    AMS1117 etwa mittig in die untere Hälfte der Platine setzen. Abstand zu Rändern: min. 5mm wegen Wärmeentwicklung.
+                </div>
+                
+                <div class="wire-info">
+                    <strong>Pin-Reihenfolge prüfen!</strong> Bei manchen Breakout-Boards ist die Reihenfolge anders! Mit Multimeter nachmessen:<br>
+                    • VIN = sollte später 5V haben<br>
+                    • GND = 0V<br>
+                    • VOUT = sollte später 3,3V haben
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div class="step">
+                <h3><span class="step-number">6</span>Ausgangskondensatoren (rechts vom AMS1117)</h3>
+                <p>Diese stabilisieren die 3,3V Ausgangsspannung - sehr wichtig für den ESP32!</p>
+                
+                <p><strong>C3 (100µF):</strong></p>
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Bauteil</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑩</strong> C3 Plus</td>
+                        <td>100µF Elektrolyt</td>
+                        <td class="color-green">→ An +3.3V BUS (vom VOUT)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑪</strong> C3 Minus</td>
+                        <td>Mit Streifen markiert</td>
+                        <td class="color-blue">→ An GND (über Draht zum GND BUS)</td>
+                    </tr>
+                </table>
+                
+                <p style="margin-top: 20px;"><strong>C4 (100nF):</strong></p>
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Bauteil</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑫</strong> C4 Bein 1</td>
+                        <td>100nF Keramik</td>
+                        <td class="color-green">→ An +3.3V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑬</strong> C4 Bein 2</td>
+                        <td>Unpolar</td>
+                        <td class="color-blue">→ An GND (zusammen mit C3)</td>
+                    </tr>
+                </table>
+                
+                <div class="wire-info">
+                    <strong>Wichtig:</strong> C3 und C4 Minus/GND sollten am selben Punkt zusammenkommen und von dort ein einziger Draht zum AMS1117 GND-Pin führen. Das minimiert Masseschleifen.
+                </div>
+            </div>
+
+            <!-- Step 7 -->
+            <div class="step">
+                <h3><span class="step-number">7</span>5V Ausgang (links unten)</h3>
+                <p>Zum Sensor Board (versorgt Spannungsteiler und Pull-ups mit 5V).</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Pin</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑭</strong> +5V Out</td>
+                        <td>Stiftleiste oder Schraubklemme</td>
+                        <td class="color-red">→ Draht zum +5V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑮</strong> GND Out</td>
+                        <td>Daneben</td>
+                        <td class="color-blue">→ Draht zum GND BUS</td>
+                    </tr>
+                </table>
+                
+                <div class="tip-box">
+                    <h4>💡 Beschriftung:</h4>
+                    Mit Edding oder Etiketten-Drucker: "+5V → SENSOR" beschriften!
+                </div>
+            </div>
+
+            <!-- Step 8 -->
+            <div class="step">
+                <h3><span class="step-number">8</span>3.3V Ausgang (rechts unten)</h3>
+                <p>Zum Main Board (versorgt ESP32 und alle I2C-Module).</p>
+                
+                <table class="connection-table">
+                    <tr>
+                        <th>Punkt</th>
+                        <th>Pin</th>
+                        <th>Verbindung</th>
+                    </tr>
+                    <tr>
+                        <td><strong>⑯</strong> +3.3V Out</td>
+                        <td>Stiftleiste oder Schraubklemme</td>
+                        <td class="color-green">→ Draht zum +3.3V BUS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>⑰</strong> GND Out</td>
+                        <td>Daneben</td>
+                        <td class="color-blue">→ Draht zum GND (über C3/C4 zum GND BUS)</td>
+                    </tr>
+                </table>
+                
+                <div class="tip-box">
+                    <h4>💡 Beschriftung:</h4>
+                    Mit Edding: "+3.3V → MAIN" beschriften!
+                </div>
+            </div>
+
+            <!-- Step 9 - Testing -->
+            <div class="step">
+                <h3><span class="step-number">9</span>Test VOR dem Anschluss der anderen Boards!</h3>
+                <p><strong>⚠️ KRITISCH - Niemals überspringen! ⚠️</strong></p>
+                
+                <ol style="margin-left: 30px; margin-top: 15px; line-height: 2;">
+                    <li><strong>Visuell prüfen:</strong>
+                        <ul style="margin-left: 20px;">
+                            <li>Alle Lötstellen sauber? Keine Kurzschlüsse?</li>
+                            <li>Alle Kondensatoren richtig gepolt?</li>
+                            <li>Keine Lötbrücken zwischen +5V und GND?</li>
+                        </ul>
+                    </li>
+                    <li style="margin-top: 10px;"><strong>Durchgangsprüfung (Multimeter):</strong>
+                        <ul style="margin-left: 20px;">
+                            <li>GND BUS gegen +5V BUS → sollte OFFEN sein (∞ Ω)</li>
+                            <li>GND BUS gegen +3.3V BUS → sollte OFFEN sein (∞ Ω)</li>
+                            <li>+5V BUS gegen +3.3V BUS → sollte OFFEN sein (∞ Ω)</li>
+                        </ul>
+                    </li>
+                    <li style="margin-top: 10px;"><strong>USB-Wandler anschließen (ohne Last!):</strong>
+                        <ul style="margin-left: 20px;">
+                            <li>12V Netzteil an USB-Wandler</li>
+                            <li>USB-Wandler Ausgang an Power Board Eingang (① und ②)</li>
+                        </ul>
+                    </li>
+                    <li style="margin-top: 10px;"><strong>Spannungen messen:</strong>
+                        <ul style="margin-left: 20px;">
+                            <li>Zwischen +5V BUS und GND: <span class="color-red">5,0V ± 0,2V</span> ✓</li>
+                            <li>Zwischen +3.3V BUS und GND: <span class="color-green">3,3V ± 0,1V</span> ✓</li>
+                            <li>AMS1117 anfassen: Sollte handwarm sein (nicht heiß!)</li>
+                        </ul>
+                    </li>
+                    <li style="margin-top: 10px;"><strong>Last-Test (optional):</strong>
+                        <ul style="margin-left: 20px;">
+                            <li>100Ω Widerstand zwischen +3.3V und GND → 33mA Last</li>
+                            <li>Spannung sollte stabil bei 3,3V bleiben</li>
+                            <li>AMS1117 wird etwas wärmer (normal!)</li>
+                        </ul>
+                    </li>
+                </ol>
+                
+                <div class="wire-info" style="margin-top: 20px;">
+                    <strong>Falls Spannungen nicht stimmen:</strong><br>
+                    • 5V fehlt → USB-Wandler oder Eingangsverbindung prüfen<br>
+                    • 3.3V fehlt → AMS1117 VIN/VOUT Verbindungen prüfen<br>
+                    • AMS1117 sehr heiß → Kurzschluss! Sofort abstecken und GND-Verbindungen prüfen!
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Tips -->
+        <div class="tip-box" style="margin-top: 40px;">
+            <h4>🎯 Finale Tipps für perfektes Ergebnis:</h4>
+            <ul style="margin-left: 20px; margin-top: 10px; line-height: 2;">
+                <li><strong>Lötkolben:</strong> 350-380°C, Bleifrei-Lötzinn mit Flussmittel</li>
+                <li><strong>Abisolieren:</strong> Drähte 3-5mm abisolieren (nicht mehr!)</li>
+                <li><strong>Verzinnen:</strong> Alle Drähte vor dem Verlegen verzinnen</li>
+                <li><strong>Lötstellen:</strong> Sauber, glänzend, konvex (nicht kugelig!)</li>
+                <li><strong>Nacharbeit:</strong> Überstehende Beinchen mit Seitenschneider kürzen</li>
+                <li><strong>Isolation:</strong> Optional: Platine mit Klarlack (2K) beschichten für Feuchtigkeitsschutz (Boot!)</li>
+                <li><strong>Montage:</strong> Platine in Gehäuse mit Abstandshaltern (3-5mm Luft unten für Kühlung)</li>
+            </ul>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="step" style="margin-top: 30px; border-left-color: #e74c3c;">
+            <h3 style="color: #e74c3c;">🔍 Fehlersuche - Häufige Probleme</h3>
+            
+            <table class="connection-table">
+                <tr>
+                    <th>Problem</th>
+                    <th>Mögliche Ursache</th>
+                    <th>Lösung</th>
+                </tr>
+                <tr>
+                    <td>Keine 5V am Bus</td>
+                    <td>USB-Wandler defekt oder Verbindung unterbrochen</td>
+                    <td>USB-Wandler einzeln testen, Lötstellen prüfen</td>
+                </tr>
+                <tr>
+                    <td>Keine 3.3V</td>
+                    <td>AMS1117 falsch angeschlossen oder defekt</td>
+                    <td>VIN, GND, VOUT Pins mit Multimeter nachmessen</td>
+                </tr>
+                <tr>
+                    <td>3.3V zu niedrig (<3V)</td>
+                    <td>Zu viel Last oder VIN zu niedrig</td>
+                    <td>5V prüfen (muss >4,8V sein), Last reduzieren</td>
+                </tr>
+                <tr>
+                    <td>AMS1117 sehr heiß</td>
+                    <td>Kurzschluss am Ausgang</td>
+                    <td>Sofort abstecken! Ausgangskondensatoren prüfen</td>
+                </tr>
+                <tr>
+                    <td>Spannung bricht ein unter Last</td>
+                    <td>Kondensatoren fehlen oder defekt</td>
+                    <td>Alle 4 Kondensatoren prüfen/nachlöten</td>
+                </tr>
+                <tr>
+                    <td>Kondensator geplatzt</td>
+                    <td>Falsche Polung!</td>
+                    <td>Elektrolyt-Kondensator ersetzen, Polung beachten!</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Success Message -->
+        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px; margin-top: 40px; text-align: center;">
+            <h2 style="font-size: 32px; margin-bottom: 15px;">🎉 Geschafft!</h2>
+            <p style="font-size: 18px; line-height: 1.8;">
+                Wenn alle Tests erfolgreich waren, ist dein Power Board bereit für den Einsatz!<br>
+                Nächster Schritt: Sensor Board aufbauen und anschließen.<br><br>
+                <strong>Viel Erfolg beim Aufbau! ⚓🔌</strong>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
