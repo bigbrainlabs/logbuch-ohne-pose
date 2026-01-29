@@ -7,7 +7,7 @@
 
 ---
 
-**📖 Hinweis:** Alle Kapitel sind hier **vollständig und kostenlos lesbar**. Das Buch (folgt 2025) bietet editierte Version, Fotos und bequemes Format. [Mehr dazu](#-das-vollständige-buch)
+**📖 Hinweis:** Alle Kapitel sind hier **vollständig und kostenlos lesbar**. Das Buch (Februar 2026) bietet editierte Version, Fotos und bequemes Format. [Mehr dazu](#-das-vollständige-buch)
 
 ---
 
@@ -36,10 +36,14 @@ Mit Lösungen, die manchmal improvisiert sind.
 - Warum "sollte reichen" oft nicht reicht
 - Display-Starren als neue Gewohnheit
 
-### 🔄 Kapitel 2: Der Verbrauch im Detail
+### ✅ Kapitel 2: Die Verbraucher-Inventur
 *In dem ich feststelle, dass "nur 2 Ampere" keine Kleinigkeit ist*
 
-*(in Arbeit)*
+- Der Kühlschrank: 300 Wh/Tag für kaltes Bier
+- Licht, Radio, TV – die "kleinen" Sünden
+- Standby-Vampire und der Dauerstrom (1,5-2 A)
+- Die Rechnung: 1.000 Wh/Tag kommen schneller zusammen als gedacht
+- Bewusster verbrauchen statt verzichten
 
 ### ✅ Kapitel 3: Solar – Hoffnung & Grenzen
 *In dem die Sonne sich nicht an Datenblätter hält*
@@ -49,10 +53,13 @@ Mit Lösungen, die manchmal improvisiert sind.
 - Solar ist kein Stromvertrag
 - Wettervorhersagen als neue Religion
 
-### 🔄 Kapitel 4: Lichtmaschine & DC-DC
+### ✅ Kapitel 4: Laden ohne Sonne
 *In dem Fahren zur Ladestation wird*
 
-*(in Arbeit)*
+- Landstrom: Der einfache Weg (20A Ladegerät, 6 Stunden bis voll)
+- Die Lichtmaschine: Der Fahr-Weg (2-8 Stunden, Akku voller als vorher)
+- Das Zusammenspiel: Solar + Fahren + Landstrom
+- Man fährt nicht zum Laden – man lädt beim Fahren
 
 ### ✅ Kapitel 5: Fehlannahmen & kleine Katastrophen
 *In dem ich lerne, dass Excel die Physik nicht überzeugt*
@@ -125,13 +132,14 @@ Mit Lösungen, die manchmal improvisiert sind.
 **Das System:**
 - 280 Ah LiFePO₄ (3.580 Wh nutzbar)
 - 260 Wp Solar (fest + faltbar)
-- 60A DC-DC-Lader (von Lichtmaschine)
+- DC-DC-Lader (von Lichtmaschine)
+- 20A Ladegerät (für Landstrom)
 - ESP32 Monitoring mit MQTT
 
 **Der Verbrauch:**
-- Kühlschrank: ~600 Wh/Tag
-- Kleinverbraucher: ~400 Wh/Tag
-- Gesamt: 1.000-1.200 Wh/Tag
+- Kühlschrank: ~300 Wh/Tag
+- Kleinverbraucher: ~700 Wh/Tag
+- Gesamt: ~1.000 Wh/Tag
 
 **Die Realität:**
 - Sommer: Solar deckt alles + lädt Akku
@@ -146,7 +154,9 @@ Mit Lösungen, die manchmal improvisiert sind.
 band-2-strom/
 ├── kapitel/                    # Buch-Inhalte (Markdown)
 │   ├── 01-erwartungen-vs-realitaet.md
+│   ├── 02-die-verbraucher-inventur.md
 │   ├── 03-solar-hoffnung-grenzen.md
+│   ├── 04-laden-ohne-sonne.md
 │   ├── 05-fehlannahmen-katastrophen.md
 │   ├── 06-improvisieren.md
 │   ├── 07-messen-statt-raten.md
@@ -174,11 +184,11 @@ band-2-strom/
 
 ---
 
-## 🔗 Verbindung zu Band X (Monitoring)
+## 🔗 Verbindung zu Band 3 (Sensoren & Monitoring)
 
 **Kapitel 7 & 8 dieses Bands** dokumentieren den Übergang von "ich schätze mal" zu "ich weiß es genau".
 
-Das Monitoring-System aus **Band X** ist die technische Umsetzung davon:
+Das Monitoring-System aus **Band 3** ist die technische Umsetzung davon:
 - ESP32 mit Sensoren
 - MQTT Datenfluss
 - BoatOS Dashboard
@@ -187,7 +197,7 @@ Das Monitoring-System aus **Band X** ist die technische Umsetzung davon:
 **Die Projekte bauen aufeinander auf:**
 
 ```
-Band 2 (Strom):           Band X (Monitoring):
+Band 2 (Strom):           Band 3 (Monitoring):
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Problem beschrieben   →   Lösung gebaut
 Verbrauch geschätzt   →   Verbrauch gemessen
@@ -211,7 +221,7 @@ Die **Kapitel sind vollständig** im Rohformat (Markdown) zum Lesen und Lernen.
 - Leserfreundliches Layout (Kindle/Print)
 - **Offline am Boot lesbar** (kein Internet nötig!)
 
-→ **Amazon KDP:** *(~7€ Kindle, ~12€ Print)* – folgt 2025
+→ **Amazon KDP:** *(~7€ Kindle, ~12€ Print)* – Februar 2026
 
 **Warum kaufen wenn's hier kostenlos ist?**
 
@@ -251,6 +261,6 @@ Weil:
 
 ---
 
-**Status:** 📝 6/8 Kapitel fertig | Veröffentlichung: 2025 (geplant)
+**Status:** ✅ 8/8 Kapitel fertig | Veröffentlichung: Februar 2026
 
 *"Autarkie ist kein Ziel. Autarkie ist ein Kompromiss zwischen Wunsch und Wetter."*
