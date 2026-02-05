@@ -13,7 +13,7 @@ Diese Repository-Serie dokumentiert praktische Boot-Projekte mit der ehrlichen P
 ### Band 1: Der Motor läuft
 **Vom guten Boot zum Smart-Boat – eine Lernreise**
 
-*Status: ✅ Fertig geschrieben! (8/8 Kapitel, 19.000 Wörter)*
+*Status: ✅ Fertig & veröffentlicht (8 Kapitel, ~11.000 Wörter)*
 
 Das Boot funktioniert. Motor läuft. Alles schwimmt.  
 Aber: Voltmeter zeigt immer 12.0V. Tankuhr zeigt immer 3/4.  
@@ -23,17 +23,19 @@ Spoiler: Das nervt.
 - Der Kauf (frisch lackiert, Motor läuft, Elektrik „gewachsen")
 - Die Erstinspektion (Kabel-Archäologie, 4 Jahrzehnte, 5 Schichten)
 - Der erste Sommer (funktioniert! Aber: Wackelkontakt-Heizung...)
-- Der erste Winter (Frustration, YouTube, 12 Tabs, 134€ Warenkorb)
-- Die Idee (Arduino IDE, „Hallo Welt!", ESP32, 8€ Hardware)
+- Der erste Winter (Frustration, YouTube, Bastelkiste durchgewühlt)
+- Die Idee (Arduino IDE, „Hallo Welt!", ESP32, Elektronik-Vorwissen hilft)
 - Das erste Projekt (LED-Beleuchtung... mit Rauch)
 - Die Vision (von „2 Projekte" zu „ALLES digitalisieren")
-- Der Motor läuft (Epilog: 3 Jahre später, BoatOS v2.4, Motor läuft immer noch)
+- Epilog: 3 Jahre später (BoatOS v2.4, der Motor läuft immer noch)
+
+**Auch auf Englisch:** *Logbook Without Pretense – Volume 1: The Engine Runs*
 
 [→ Zum Band](band-1-der-motor-laeuft/)
 
-**Running Gag:** *"Der Motor läuft. Seit 1985. Immer."*
+**Running Gag:** *"Der Motor läuft. Seit 1989. Immer."*
 
-**Launch:** Februar 2026
+**Launch:** Februar 2026 ✅
 
 ---
 
@@ -64,14 +66,22 @@ Spoiler: Kommt drauf an.
 
 *Status: ✅ Dokumentation komplett, Buch in Planung*
 
-Drei handgelötete Platinen. Ein ESP32. Acht Sensoren.  
+Drei handgelötete Platinen. Ein ESP32. Acht Kanäle.  
 Und die Frage: Warum zeigt der I2C-Scanner nur ein Gerät statt drei?
 
-**Was entsteht:**
-- 8-Kanal Sensor-System (Batterien, Tank, Temp, Öl, RPM, Pitch, Roll)
-- MQTT-basierte Datenübertragung zum Raspberry Pi
-- Live-Dashboard mit allen Bootsdaten
-- VDO Instrumente bleiben als mechanisches Backup
+**Das System (3-Board-Architektur):**
+- **Powerboard:** 12V→5V Buck Converter + AMS1117 3.3V Regler
+- **Sensorboard:** Anschlüsse für VDO-Sensoren, Spannungsteiler, Pull-ups
+- **Mainboard:** ESP32 + 2× ADS1115 (16-bit ADC) + MPU6050 (6-DOF IMU)
+
+**Gemessene Werte:**
+- 3× Batteriespannung (Starter, Verbraucher, Bow-Thruster)
+- Tankfüllstand (über VDO-Geber)
+- Öldruck & Öltemperatur
+- Motortemperatur
+- Drehzahl (RPM)
+- Durchfluss Diesel (Fuel Flow)
+- Neigung (Pitch/Roll über MPU6050)
 
 [→ Zum Projekt](band-3-sensoren/)
 
@@ -97,25 +107,28 @@ Mit eigener Navigation. Moderner UX. Voller Integration.
 
 **Das System:**
 - 🗺️ **Navigation** (eigene Implementierung, OpenSeaMap, GPS-Tracking)
-- 📊 **Dashboard** (alle Sensoren live: 8× ESP32, MQTT)
+- 📊 **Dashboard** (alle Sensoren live via MQTT)
 - 🎮 **Steuerung** (Heizung, Licht, Pumpen, Alarme)
 - 🏠 **Home Assistant** (Smart Home fürs Boot)
 - 📱 **Mobile-First** (Tablet, Handy, Touch-optimiert)
 - 🌐 **WiFi Remote** (von überall auf dem Boot)
 
 **Technologie:**
-- Raspberry Pi 4 + Home Assistant OS
+- Raspberry Pi 4 (Pi 5 zu stromhungrig für Marine-Einsatz)
+- Home Assistant OS
 - React Frontend (TypeScript, Leaflet, Tailwind)
 - Python Backend (FastAPI, MQTT, GPSd)
-- 8× ESP32 (Sensoren via MQTT)
+- ESP32 Sensor-System (siehe Band 3)
+- Mosquitto MQTT Broker
+- SignalK Integration
 
 **➡️ Zum Projekt: [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)**
 
 **Kosten:**
-- Minimal: 110€ (Raspberry Pi, GPS, SD-Karte)
-- Empfohlen: 230€ (+ Display, Gehäuse)
-- Komplett: 524€ (+ 8× ESP32, Sensoren)
-- **vs. Raymarine Axiom 7: 2.300€** → Ersparnis: 1.776€!
+- Minimal: ~110€ (Raspberry Pi 4, GPS, SD-Karte)
+- Empfohlen: ~280€ (+ Display, Gehäuse)
+- Komplett: ~450€ (+ Sensor-System, Gehäuse)
+- **vs. Raymarine Axiom 7: 2.300€** → Ersparnis: ~1.850€!
 
 **Warum eigene Navigation?**
 - ❌ OpenCPN: zu komplex, nicht mobile-freundlich, veraltete UX
@@ -128,7 +141,7 @@ Mit eigener Navigation. Moderner UX. Voller Integration.
 ### Band 6: Die Ventil-Heizung
 **Wie ein Winterproblem zur Innovation wurde**
 
-*Status: 📋 Outline fertig, Prototyp läuft*
+*Status: 📋 Prototyp V2 funktioniert, Gebrauchsmuster in Arbeit*
 
 3 Stunden mit Föhn am gefrorenen Ventil?  
 Oder 15 Minuten mit selbstgebauter Heizung?  
@@ -136,8 +149,9 @@ Die Wahl ist klar.
 
 **Die Innovation:**
 - Clamshell-Heizmanschette (aufklappbar!)
-- ESP32 Temperatur-Regelung
-- 3D-druckbar (PETG)
+- ASA-Filament + Armaflex-Isolierung
+- Temperatur-geregelt (50-60°C)
+- 3D-druckbar
 - 15 Minuten statt 3+ Stunden
 
 **Das Business-Modell:**
@@ -212,37 +226,58 @@ Oder 6 Monate eine Automatik bauen?
 
 ### **Band 1 - Die Basics:**
 
-**Erste Schritte:**
+**Erste Schritte (mit Elektronik-Vorwissen):**
 - Arduino IDE
 - ESP32 DevKit (8€)
-- Breadboard & Jumper Wires
+- Bastelkiste (Breadboard, Jumper, Widerstände)
 - Spannungsteiler (100kΩ + 47kΩ)
-- LED-Strips (12V)
+- LED-Strips (12V, mit Vorwiderstand!)
 - OLED Display 0.96" (I2C)
 
-### **Band 3 - Monitoring System:**
+### **Band 3 - Sensor-System (3-Board-Architektur):**
 
 **Hardware:**
-- ESP32 WROOM-32 DevKit
-- 2× ADS1115 (16-bit ADC, I2C)
-- MPU6050 (6-DOF IMU)
+```
+┌─────────────┐
+│ POWERBOARD  │  12V → 5V Buck → AMS1117 → 3.3V
+└──────┬──────┘
+       │
+┌──────┴──────┐
+│ SENSORBOARD │  VDO-Anschlüsse, Spannungsteiler, Pull-ups
+└──────┬──────┘
+       │
+┌──────┴──────┐
+│  MAINBOARD  │  ESP32 + 2× ADS1115 + MPU6050
+└─────────────┘
+```
+
+- 1× ESP32 WROOM-32 DevKit
+- 2× ADS1115 (16-bit ADC, I2C, 8 Kanäle gesamt)
+- 1× MPU6050 (6-DOF IMU für Pitch/Roll)
 - VDO Marine-Sensoren (Tank, Temp, Öl, RPM)
-- 12V→5V Buck Converter + AMS1117 Linear Regler
 - Handgelötete Lochraster-Platinen (3 Stück)
+
+**Gemessene Werte:**
+- 3× Batteriespannung
+- Tankfüllstand
+- Öldruck + Öltemperatur
+- Motortemperatur
+- Drehzahl (RPM)
+- Fuel Flow
+- Pitch/Roll
 
 **Software:**
 - Arduino IDE (C++)
 - WiFiManager (Captive Portal)
 - PubSubClient (MQTT)
-- MQTT Broker (Mosquitto auf Raspberry Pi)
 
 ### **Band 4-5 - BoatOS:**
 
 **Hardware:**
-- Raspberry Pi 4 (4GB)
-- 7" Touch Display
+- Raspberry Pi 4 (4GB, Pi 5 zu stromhungrig)
+- 7" Touch Display (optional)
 - USB GPS-Modul
-- 8× ESP32 (Sensoren)
+- ESP32 Sensor-System (siehe Band 3)
 
 **Software:**
 - Home Assistant OS
@@ -250,23 +285,23 @@ Oder 6 Monate eine Automatik bauen?
 - Python 3.11 + FastAPI (Backend)
 - Leaflet (Karten)
 - Mosquitto MQTT Broker
-- InfluxDB (optional, historische Daten)
+- SignalK (Protokoll)
+- InfluxDB (historische Daten)
 
 **➡️ Komplette Doku: [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)**
 
 ### **Band 6 - Ventil-Heizung:**
 
 **Hardware:**
-- ESP32 DevKit
 - PTC-Heizelement (60W, 12V)
 - DS18B20 Temperatur-Sensor
-- OLED Display 0.96"
-- 3D-gedrucktes Gehäuse (PETG)
+- ESP32 DevKit (optional, für Regelung)
+- 3D-gedrucktes Gehäuse (ASA-Filament)
+- Armaflex-Isolierung
 
 **Software:**
-- Arduino IDE (C++)
 - Temperatur-Regelung (50-60°C)
-- Display-Anzeige (Live-Temperatur)
+- Optional: MQTT-Integration
 
 ### **Band 7 - Auto-Sat:**
 
@@ -350,17 +385,17 @@ Oder 6 Monate eine Automatik bauen?
 ═══════════════════════════════════════════════
 BAND-ÜBERSICHT:
 ───────────────────────────────────────────────
-Band 1:  ✅ Fertig (19.000 Wörter, alle 8 Kapitel)
+Band 1:  ✅ Fertig & veröffentlicht (DE + EN)
 Band 2:  🔄 75% (6/8 Kapitel)
 Band 3:  ✅ Doku komplett
 Band 4:  💻 System läuft (v2.4)
 Band 5:  💻 System läuft (v2.4)
-Band 6:  📋 Outline fertig
+Band 6:  🔄 Prototyp V2 funktioniert
 Band 7:  📋 Outline fertig
 
 PROJEKTE:
 ───────────────────────────────────────────────
-Monitoring:       ✅ Hardware läuft
+Sensor-System:    ✅ Hardware läuft (3-Board-Architektur)
 BoatOS:           ✅ v2.4 stabil
 Ventil-Heizung:   🔄 Prototyp V2 funktioniert
 Auto-Sat:         🔄 Prototyp in Arbeit
@@ -384,31 +419,30 @@ logbuch-ohne-pose/
 │
 ├── band-1-der-motor-laeuft/     ✅ KOMPLETT
 │   ├── README.md
-│   ├── OUTLINE.md
-│   ├── MARKETING.md
-│   └── kapitel/
-│       ├── 01-der-kauf.md
-│       ├── 02-erstinspektion.md
-│       ├── 03-erster-sommer.md
-│       ├── 04-erster-winter.md
-│       ├── 05-die-idee.md
-│       ├── 06-erstes-projekt.md
-│       ├── 07-die-vision.md
-│       └── 08-der-motor-laeuft.md
+│   ├── kapitel/
+│   │   ├── 01-der-kauf.md
+│   │   ├── 02-erstinspektion.md
+│   │   ├── 03-erster-sommer.md
+│   │   ├── 04-erster-winter.md
+│   │   ├── 05-die-idee.md
+│   │   ├── 06-erstes-projekt.md
+│   │   ├── 07-die-vision.md
+│   │   └── 08-der-motor-laeuft.md
+│   └── english/
+│       ├── 01-the-purchase.md
+│       ├── 02-the-first-inspection.md
+│       └── ...
 │
 ├── band-2-strom/                🔄 In Arbeit
 │   ├── README.md
 │   └── kapitel/
-│       ├── 01-erwartungen-vs-realitaet.md
-│       ├── 03-solar-hoffnung-grenzen.md
-│       ├── 05-fehlannahmen-katastrophen.md
-│       ├── 06-improvisieren.md
-│       ├── 07-messen-statt-raten.md
-│       └── 08-system-lernt-mit.md
 │
 ├── band-3-sensoren/             ✅ Doku komplett
 │   ├── README.md
 │   ├── hardware/
+│   │   ├── powerboard/
+│   │   ├── sensorboard/
+│   │   └── mainboard/
 │   ├── firmware/
 │   └── docs/
 │
@@ -427,7 +461,7 @@ logbuch-ohne-pose/
 - **BoatOS:** [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)
 
 **Bücher:**
-- Amazon KDP (ab Februar 2026)
+- Amazon KDP (Band 1 ab Februar 2026)
 - Band 1-7 geplant
 
 **Community:**
@@ -480,16 +514,6 @@ logbuch-ohne-pose/
 
 ---
 
-## 📧 Kontakt
-
-**Fragen? Ideen? Feedback?**
-
-- 💬 GitHub Discussions (bevorzugt!)
-- 🐛 GitHub Issues (für Bugs)
-- 📧 Email: [deine email hier]
-
----
-
 ## ⚓ Über das Projekt
 
 **„Logbuch ohne Pose" entstand aus Frustration.**
@@ -512,7 +536,7 @@ Frustration über:
 
 ---
 
-**Letzte Aktualisierung:** 25. Januar 2026
+**Letzte Aktualisierung:** 5. Februar 2026
 
 *„Der Motor läuft. Die Projekte auch. Die Bücher entstehen. Die Community wächst."*
 
