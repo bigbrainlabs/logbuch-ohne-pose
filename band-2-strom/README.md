@@ -74,9 +74,9 @@ Mit Lösungen, die manchmal improvisiert sind.
 
 - Zweiter Akku? (Idee für später)
 - Wasserkocher bei 12V? (Gas ist schneller)
-- Faltbares Panel (200 Wp Raumfahrt-Gefühl)
+- Faltbares Panel (200 Wp Raumfahrt-Gefühl) – geplant!
 - Weniger Verbrauch (bewusster, nicht Verzicht)
-- Fahren als Ladestation (mobile Kraftwerk)
+- Fahren als Ladestation (mobiles Kraftwerk)
 
 ### ✅ Kapitel 7: Messen statt Raten
 *In dem ich aufhöre zu schätzen und anfange zu wissen*
@@ -131,10 +131,13 @@ Mit Lösungen, die manchmal improvisiert sind.
 
 **Das System:**
 - 280 Ah LiFePO₄ (3.580 Wh nutzbar)
-- 260 Wp Solar (fest + faltbar)
+- 260 Wp Solar (fest)
 - DC-DC-Lader (von Lichtmaschine)
 - 20A Ladegerät (für Landstrom)
 - ESP32 Monitoring mit MQTT
+
+**Geplant:**
+- Faltbares Panel 200 Wp (für Winter-Boost)
 
 **Der Verbrauch:**
 - Kühlschrank: ~300 Wh/Tag
@@ -144,7 +147,7 @@ Mit Lösungen, die manchmal improvisiert sind.
 **Die Realität:**
 - Sommer: Solar deckt alles + lädt Akku
 - Winter: Solar hilft, reicht nicht
-- Lösung: Fahren + faltbares Panel + weniger Verbrauch
+- Lösung: Fahren + weniger Verbrauch (+ faltbares Panel geplant)
 
 ---
 
