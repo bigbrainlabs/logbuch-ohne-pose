@@ -17,6 +17,17 @@ Lädt den Akku nach.
 Man fühlt sich autark, weise, vorausschauend.
 Man erwägt kurz, dem Nachbarn Strom zu verkaufen.
 
+---
+
+An Tagen wie diesen, wenn die Sonne aufs Solarpanel brennt und ich an Deck sitze, denke ich an Kira.
+Sie hätte hier gerne gelegen, Nase in der Sonne, glücklich.
+
+Buster liegt drinnen. Unterm Tisch. Den letzten kühlen Fleck aufsaugen.
+
+Beide haben recht.
+
+---
+
 Dann kommt Oktober.
 Und mit ihm die Ernüchterung.
 
