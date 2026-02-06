@@ -26,7 +26,7 @@ Das ist ein DIY-Projekt für Bootsbesitzer, die:
 - SignalK kompatibel (Standard für Marine-Daten)
 - VDO Instrumente bleiben als Backup (Redundanz!)
 
-**Status:** ⚙️ Hardware läuft stabil, Software getestet, auf Boot im Einsatz
+**Status:** 🔧 Hardware & Firmware getestet, Boot-Installation ausstehend
 
 ---
 
@@ -38,21 +38,33 @@ Das ist ein DIY-Projekt für Bootsbesitzer, die:
 - 🌡️ Motor-Temperatur (VDO Sender)
 - 🛢️ Öldruck (VDO Sender)
 - 🔄 Motor-Drehzahl (W-Klemme Lichtmaschine)
-- 🧭 Pitch & Roll (MPU6050 IMU) - **ECHT, nicht simuliert!**
-- 💧 Durchfluss (optional, FM-HL3012)
+- 🧭 Pitch & Roll (MPU6050 IMU)
+- 💧 Durchfluss (optional)
 
 **System:**
 - 📡 MQTT über WiFi (Raspberry Pi als Broker)
 - 🌐 WiFiManager (Captive Portal für einfaches Setup)
 - 🔄 OTA Updates (kein USB-Kabel nötig nach Installation)
 - 🔋 12V Bordnetz → 5V → 3.3V (saubere Stromversorgung)
-- 🧪 TEST_MODE (Fake-Daten für Entwicklung, Mixed-Mode für Tests)
+- 🧪 TEST_MODE (Fake-Daten für Entwicklung)
 - 🛡️ Watchdog (automatischer Neustart bei Problemen)
 
-**Topics:**
-- Eigene Topics: `boot/sensoren/*` (V, bar, RPM, °C, %)
-- SignalK Topics: `signalk/vessels/self/*` (Standard-konform)
-- Status Topics: `boot/status/esp32/*` (online, uptime, WiFi)
+**MQTT Topics:**
+```
+boot/sensoren/batterie1      (V)
+boot/sensoren/batterie2      (V)
+boot/sensoren/tank           (%)
+boot/sensoren/oeldruck       (bar)
+boot/sensoren/temperatur     (°C)
+boot/sensoren/drehzahl       (RPM)
+boot/sensoren/durchfluss     (l/h)
+boot/sensoren/pitch          (°)
+boot/sensoren/roll           (°)
+boot/status/esp32/online     (true/false)
+boot/status/esp32/uptime     (s)
+
+signalk/vessels/self/*       (Standard-konform)
+```
 
 ---
 
@@ -62,70 +74,62 @@ Das ist ein DIY-Projekt für Bootsbesitzer, die:
 
 ```
 ┌─────────────────────┐
-│  Power Board        │  12V → 5V → 3.3V
+│  POWERBOARD         │  5V rein → 3.3V raus
 ├─────────────────────┤
-│  Sensor Board       │  VDO Sensoren auslesen
+│  SENSORBOARD        │  VDO Sensoren → Spannungsteiler
 ├─────────────────────┤
-│  Main Board         │  ESP32 + I2C Module
+│  MAINBOARD          │  ESP32 + 2×ADS1115 + MPU6050
 └─────────────────────┘
 ```
 
-### **1. Power Board (50×46mm)**
-- **Input:** 12V Bordnetz (via Buck Converter 5V)
-- **Output:** 3.3V (AMS1117) + 5V (Pass-through)
-- **Funktion:** Saubere Stromversorgung für digitale + analoge Teile
+---
+
+### **1. Powerboard**
+
+- **Input:** 5V (vom vorhandenen 12V→5V Netzteil)
+- **Output:** 3.3V (AMS1117) für ESP32
+- **Funktion:** Saubere Stromversorgung
 
 **Komponenten:**
 - AMS1117-3.3V Linear Regler
 - 2× 100µF + 2× 100nF Kondensatoren
 - Schraubklemmen für Ein-/Ausgänge
 
-[→ Schaltplan](hardware/schaltplaene/power_board.html)
+---
+
+### **2. Sensorboard**
+
+- **Input:** 8× Sensorsignale (12V Bereich)
+- **Output:** 8× Analog-Signale (0-3.8V für ADS1115)
+- **Funktion:** Spannungsteiler, Signal-Aufbereitung
+
+**Spannungsteiler (für alle 12V Signale):**
+```
+12V Signal → 100kΩ → [Abgriff] → 47kΩ → GND
+                         ↓
+                    zum ADS1115 (max 3.84V)
+```
+
+**Formel:** Vout = 12V × 47k / (100k + 47k) = 3.84V ✓
+
+**Kanalbelegung:**
+
+| Klemme | Signal | ADS1115 | Beschreibung |
+|--------|--------|---------|--------------|
+| K1 | BAT1+ | #1 CH0 | Starterbatterie |
+| K2 | BAT2+ | #1 CH1 | Versorgerbatterie |
+| K3 | TANK | #1 CH2 | VDO Tankgeber |
+| K4 | OELDRUCK | #1 CH3 | VDO Öldruckgeber |
+| K5 | TEMP | #2 CH0 | VDO Temperaturgeber |
+| K6 | RPM | #2 CH1 | W-Klemme Lichtmaschine |
+| K7 | FLOW | #2 CH2 | Durchflusssensor |
+| K8 | RESERVE | #2 CH3 | (frei) |
 
 ---
 
-### **2. Sensor Board (36×46mm)**
-- **Input:** 6× VDO Sensoren (Widerstandswerte 0-240Ω)
-- **Output:** 6× Analog-Signale (0-5V)
-- **Funktion:** Spannungsteiler, Pull-ups, Filterung
+### **3. Mainboard**
 
-**Schaltungstopologie:**
-
-**Batterie-Spannungsteiler (2×):**
-```
-12V Batterie → 10kΩ → [Abgriff] → 4.7kΩ → GND
-                        ↓
-                    zum ADC (0-3.3V)
-```
-
-**Pull-up Widerstände (4×):**
-```
-+5V → 1kΩ → [Abgriff] → VDO Sensor (0-240Ω) → GND
-              ↓
-           100nF parallel (Filter)
-              ↓
-           zum ADC
-```
-
-**RPM (W-Klemme):**
-```
-W-Terminal → 1N4007 → 10kΩ → [Abgriff] → 4.7kΩ → GND
-                                ↓
-                             10µF (Glättung)
-                                ↓
-                             zum ADC
-```
-
-**Wichtig:** 
-- 100nF Kondensatoren sind PARALLEL (Signal zu GND), nicht in Serie!
-- Common GND über Bootsmasse (von Power Board)
-
-[→ Schaltplan](hardware/schaltplaene/sensor_board.html)
-
----
-
-### **3. Main Board (Größe variabel)**
-- **Zentrale:** ESP32 WROOM-32 DevKit (38-pin)
+- **Zentrale:** ESP32 WROOM-32 DevKit
 - **ADCs:** 2× ADS1115 (16-bit, I2C)
 - **IMU:** MPU6050 (6-DOF, I2C)
 - **Funktion:** Daten sammeln, verarbeiten, via MQTT senden
@@ -139,47 +143,52 @@ ESP32 GPIO21 (SDA) ────┬─── ADS1115 #1 (0x48)
 ESP32 GPIO22 (SCL) ────┴─── (alle parallel)
 ```
 
-**KRITISCH:**
-- ADS1115 #1: ADDR → GND (Adresse 0x48)
-- ADS1115 #2: ADDR → VDD (Adresse 0x49) ⚠️ **NICHT vergessen!**
-- MPU6050: AD0 → GND oder offen (Adresse 0x68)
+**⚠️ KRITISCH – I2C Adressen:**
 
-**Entkopplung:**
-- 4× 100nF Keramik-Kondensatoren (direkt an VDD/GND Pins!)
-- Je einer für: ESP32, ADS#1, ADS#2, MPU6050
+| Gerät | Adresse | ADDR-Pin |
+|-------|---------|----------|
+| ADS1115 #1 | 0x48 | → GND |
+| ADS1115 #2 | 0x49 | → VDD (3.3V) |
+| MPU6050 | 0x68 | (fest) |
 
-[→ Schaltplan](hardware/schaltplaene/main_board.html)
+**Beide ADS1115 auf GND = Adresskollision = Fehler!**
 
 ---
 
-## 💻 Software
+## 💻 Firmware
 
-### **Firmware Features:**
+### **Dateien:**
 
-**Konfiguration:**
+| Datei | Zweck |
+|-------|-------|
+| `ESP32_BootMonitor.ino` | Produktiv-Firmware |
+| `ESP32_BootMonitor_TEST.ino` | Test-Firmware mit Fake-Daten |
+
+### **Features:**
+
 - WiFiManager Captive Portal (SSID + Passwort)
-- MQTT Server/Port/User/Pass konfigurierbar (kein Hardcoding!)
-- Settings im Flash gespeichert (überleben Neustart)
-- Factory Reset: Boot-Button 3s beim Start gedrückt halten
+- MQTT Server/Port konfigurierbar
+- Settings im Flash gespeichert
+- Factory Reset: Boot-Button 3s gedrückt halten
 
-**Modi:**
-- **TEST_MODE = true:** Fake-Daten (außer MPU6050 = echt!)
-- **TEST_MODE = false:** Alle echten Sensoren
-- Mixed-Mode perfekt für Entwicklung
+### **Update-Raten:**
 
-**Update-Raten:**
-- **5 Hz** (200ms): RPM, Durchfluss
-- **1 Hz** (1s): Tank, Temp, Öldruck
-- **0.2 Hz** (5s): Batterien, Pitch/Roll
-- **0.1 Hz** (10s): Status/Heartbeat
+| Intervall | Sensoren |
+|-----------|----------|
+| 200ms (5 Hz) | RPM, Durchfluss |
+| 1s (1 Hz) | Tank, Temp, Öldruck |
+| 5s (0.2 Hz) | Batterien, Pitch/Roll |
+| 10s (0.1 Hz) | Status/Heartbeat |
 
-**Sicherheit:**
-- Watchdog Timer (10s, automatischer Neustart)
-- MQTT Last Will (offline-Status bei Ausfall)
-- Retained Messages (letzter Wert bleibt)
+### **Benötigte Libraries:**
 
-[→ Code](firmware/ESP32_BootMonitor_TEST.ino)  
-[→ Installation](docs/installation.md)
+```
+- WiFiManager by tzapu
+- PubSubClient by Nick O'Leary
+- Adafruit ADS1X15
+- Adafruit MPU6050
+- Adafruit Unified Sensor
+```
 
 ---
 
@@ -187,257 +196,154 @@ ESP32 GPIO22 (SCL) ────┴─── (alle parallel)
 
 ### **Hauptkomponenten:**
 
-| Teil | Anzahl | Typ | Preis (ca.) | Link |
-|------|--------|-----|-------------|------|
-| ESP32 DevKit | 1 | WROOM-32, 38-pin | 8€ | [AZ-Delivery](https://www.az-delivery.de) |
-| ADS1115 | 2 | 16-bit ADC Breakout | 2× 6€ | Amazon/eBay |
-| MPU6050 | 1 | GY-521 Breakout | 4€ | Amazon/eBay |
-| AMS1117-3.3V | 1 | Linear Regler | 1€ | Reichelt/Conrad |
-| Buck 12V→5V | 1 | 10A Step-Down | 10€ | Amazon |
-| Lochraster | 3 | Verschiedene Größen | 5€ | Conrad |
-| Widerstände | ~20 | 1kΩ, 4.7kΩ, 10kΩ | 2€ | Sortiment |
-| Kondensatoren | ~10 | 100nF, 100µF, 10µF | 3€ | Sortiment |
-| Diode 1N4007 | 1 | Gleichrichter | 0.50€ | Conrad |
-| Draht | 5m | 0.6mm Kupferlackdraht | 3€ | Conrad |
-| Schraubklemmen | 10 | 2/3-polig | 5€ | Conrad |
-| Stiftleisten | Div. | 2.54mm männlich/weiblich | 3€ | Sortiment |
+| Teil | Anzahl | Preis (ca.) |
+|------|--------|-------------|
+| ESP32 DevKit WROOM-32 | 1 | 8€ |
+| ADS1115 Breakout | 2 | 12€ |
+| MPU6050 GY-521 | 1 | 4€ |
+| AMS1117-3.3V | 1 | 1€ |
+| Lochraster (div. Größen) | 3 | 5€ |
+| Widerstände 100kΩ | 8 | 1€ |
+| Widerstände 47kΩ | 8 | 1€ |
+| Kondensatoren 100nF | 6 | 1€ |
+| Kondensatoren 100µF | 2 | 1€ |
+| Schraubklemmen | 10 | 5€ |
+| Stiftleisten | div. | 3€ |
+| Draht 0.6mm | 5m | 3€ |
 
-**Gesamt: ~60€** (ohne Gehäuse, Kabel, VDO Sensoren)
+**Gesamt Hardware: ~45€**
 
-**Optional:**
-- 3D-Druck Gehäuse (PETG, ~50g) → 3€
-- Silikon-Verguss (50ml) → 8€
-- Kabelverschraubungen PG7/PG9 → 5€
-- Belüftungsmembran M12 → 2€
+### **Optional:**
 
-[→ Detaillierte BOM](hardware/bom.md)
+| Teil | Preis |
+|------|-------|
+| 3D-Druck Gehäuse (ASA) | 5€ |
+| Silikon-Verguss | 8€ |
+| Kabelverschraubungen | 5€ |
 
 ---
 
-## 🚀 Quick Start
+## 🔗 BoatOS Integration
 
-### **1. Hardware bauen**
-1. Power Board löten & testen (5V + 3.3V Check)
-2. Sensor Board löten & testen (Spannungen mit Multimeter prüfen)
-3. Main Board löten (ESP32 auf Buchsenleiste!)
-4. I2C-Scanner Test (muss 0x48, 0x49, 0x68 finden)
+Das BoatOS Dashboard empfängt die MQTT-Daten direkt und zeigt sie in Widgets an:
 
-[→ Detaillierte Anleitung](docs/installation.md)
+- **Gauges** für Batterien, Temperatur, Öldruck
+- **Balken** für Tankfüllstand
+- **Zahlen** für RPM, Durchfluss
+- **Graphen** für Verlauf (historisch)
+- **Alarme** bei kritischen Werten
 
-### **2. Firmware hochladen**
-```bash
-# Arduino IDE Libraries installieren:
-- WiFiManager by tzapu
-- PubSubClient by Nick O'Leary
-- Adafruit ADS1X15
-- Adafruit MPU6050
-- Adafruit Unified Sensor
+Die Integration erfolgt über MQTT → keine zusätzliche Software nötig.
 
-# Code öffnen & hochladen
-ESP32_BootMonitor_TEST.ino
-```
+Zusätzlich werden die Daten auch als SignalK Topics publiziert für Kompatibilität mit anderen Marine-Systemen.
 
-### **3. WiFi & MQTT konfigurieren**
-1. ESP32 startet Access Point "BootMonitor-Setup"
-2. Mit Handy/Laptop verbinden (Passwort: boot2025)
-3. Captive Portal öffnet automatisch
-4. WiFi SSID + Passwort eingeben
-5. MQTT Server IP + Port eingeben (z.B. 192.168.1.100:1883)
-6. Speichern → ESP32 verbindet sich
+---
 
-### **4. MQTT Broker einrichten (Raspberry Pi)**
-```bash
-sudo apt install mosquitto mosquitto-clients
-sudo systemctl enable mosquitto
+## 📊 VDO Kalibrierung
 
-# Test ob's läuft:
-mosquitto_sub -h localhost -t 'boot/#' -v
-```
+VDO Sensoren haben spezifische Kennlinien (Widerstand → Messwert).
 
-### **5. BoatOS Dashboard verbinden**
-- MQTT Topics abonnieren
-- Widgets erstellen (Gauges, Graphen, Balken)
-- Live-Daten fließen!
+**Standard VDO Kennlinien:**
 
-[→ Dashboard Setup](docs/dashboard-integration.md)
+**Tank:**
+| Füllstand | Widerstand |
+|-----------|------------|
+| Leer | 240Ω |
+| Voll | 33Ω |
+
+**Temperatur:**
+| Temp | Widerstand |
+|------|------------|
+| 40°C | 560Ω |
+| 60°C | 240Ω |
+| 80°C | 110Ω |
+| 100°C | 52Ω |
+| 120°C | 18Ω |
+
+**Öldruck:**
+| Druck | Widerstand |
+|-------|------------|
+| 0 bar | 184Ω |
+| 1 bar | 120Ω |
+| 3 bar | 43Ω |
+| 5 bar | 10Ω |
+
+**Hinweis:** Wenn VDO Instrumente parallel laufen, verschieben sich die Kennlinien leicht (5-10%). Nach Installation neu kalibrieren!
 
 ---
 
 ## 🐛 Troubleshooting
 
-### **Problem: I2C-Scanner findet nur 1 Gerät**
-**Ursache:** ADDR Pin vom ADS1115 #2 nicht verbunden  
-**Lösung:** ADDR Pin von ADS#2 auf VDD (3.3V) löten
-
-### **Problem: Bootloop beim Start**
-**Ursache:** Watchdog startet bevor WiFi fertig ist  
-**Lösung:** Code v1.1 verwenden (Watchdog nach WiFi-Setup)
-
-### **Problem: MQTT zeigt 0.00 für alle Werte**
-**Ursache:** Meist temporär beim Start  
-**Lösung:** 1-2 Minuten warten, dann kommen Daten
-
-### **Problem: MPU6050 nicht gefunden**
-**Ursache:** I2C Verkabelung, ADDR Pin falsch  
-**Lösung:** SDA/SCL Pins prüfen, AD0 auf GND
-
-### **Problem: VDO Sensoren zeigen falsche Werte**
-**Ursache:** Kalibrierung fehlt oder falsch  
-**Lösung:** Kennlinien in Code anpassen (siehe Kalibrierung)
-
-[→ Komplettes Troubleshooting](docs/troubleshooting.md)
+| Problem | Ursache | Lösung |
+|---------|---------|--------|
+| I2C-Scanner findet nur 1 Gerät | ADDR Pin ADS1115 #2 falsch | ADDR auf VDD (3.3V) löten |
+| Bootloop beim Start | Watchdog zu früh | Code-Update verwenden |
+| MQTT zeigt 0.00 | Startphase | 1-2 Min warten |
+| MPU6050 nicht gefunden | I2C Verkabelung | SDA/SCL prüfen |
+| VDO Werte falsch | Kalibrierung | Kennlinien anpassen |
 
 ---
 
-## 📊 Kalibrierung
+## 📁 Repository-Struktur
 
-VDO Sensoren haben spezifische Kennlinien (Widerstand → Messwert).
-
-**Standard VDO Kennlinien (bereits im Code):**
-
-**Tank:**
-- Leer: 240Ω
-- Voll: 33Ω
-
-**Temperatur:**
-- 120°C = 18Ω
-- 100°C = 52Ω
-- 80°C = 110Ω
-- 60°C = 240Ω
-- 40°C = 560Ω
-
-**Öldruck:**
-- 5 bar = 10Ω
-- 3 bar = 43Ω
-- 1 bar = 120Ω
-- 0 bar = 184Ω
-
-**Wenn VDO Instrumente parallel laufen:**
-- Kennlinien verschieben sich leicht (5-10%)
-- Nach Installation neu kalibrieren!
-
-[→ Kalibrierungs-Anleitung](kalibrierung/vdo-kennlinien.md)
-
----
-
-## 🔧 Installation auf dem Boot
-
-### **Montageort:**
-- ✅ Trocken (nicht Motorraum!)
-- ✅ Zugänglich (für Updates/Reset)
-- ✅ Belüftet (Kondenswasser!)
-- ✅ Fern von Kompass (WiFi stört)
-- ❌ Nicht in Bilge
-- ❌ Nicht im direkten Spritzwasser
-
-**Ideal:** Schalttafel-Rückseite, unter Steuerkonsole
-
-### **Gehäuse:**
-- IP65 oder besser
-- 3D-Druck: PETG oder ASA (nicht PLA!)
-- Kabelverschraubungen PG7/PG9
-- Belüftungsmembran (gegen Kondensation!)
-
-### **Verguss:**
-- Nur Unterseite vergießen (ESP32 Oberseite frei!)
-- Neutrales Silikon (nicht Bau-Silikon!)
-- Lötstellen & Drahtbrücken schützen
-- USB-Port freilassen für Updates
-
-[→ Installations-Guide](docs/installation.md)
-
----
-
-## 🔗 Integration mit SignalK
-
-```bash
-# SignalK MQTT Gateway Plugin
-cd ~/.signalk
-npm install @signalk/signalk-mqtt-gw
-
-# In SignalK WebUI konfigurieren:
-# Plugin → MQTT Gateway → Enable
-# Host: localhost, Port: 1883
-# Subscribe: signalk/vessels/self/#
 ```
-
-**Fertig!** SignalK wandelt MQTT Topics automatisch in SignalK Deltas um.
-
----
-
-## 📈 Erweiterungen
-
-**Mögliche Module:**
-- 🔥 Heizungssteuerung (Webasto/Eberspächer)
-- 💧 Bilgepumpen-Monitoring
-- ⚓ Ankerwacht (GPS + Alarm)
-- 💡 Licht-Steuerung
-- 🌡️ Innenraum-Klima
-- 🔋 Power-Monitoring (Shunt für Ströme)
-
-**Alles über MQTT = einfach erweiterbar!**
-
----
-
-## 🤝 Community
-
-**Du hast das Projekt nachgebaut?**  
-→ Zeig's uns! [Discussions](https://github.com/...)
-
-**Fehler gefunden?**  
-→ [Issue](https://github.com/.../issues) öffnen
-
-**Verbesserung gebaut?**  
-→ [Pull Request](https://github.com/.../pulls) willkommen!
+band-3-sensoren/
+├── README.md                 ← Diese Datei
+├── firmware/
+│   ├── ESP32_BootMonitor.ino
+│   └── ESP32_BootMonitor_TEST.ino
+├── hardware/
+│   ├── powerboard.md
+│   ├── sensorboard.md
+│   └── mainboard.md
+├── kalibrierung/
+│   └── vdo-kennlinien.md
+└── docs/
+    ├── installation.md
+    └── troubleshooting.md
+```
 
 ---
 
 ## 📚 Verbindung zum Buch
 
-Dieses Projekt ist die **technische Umsetzung** von **Band 2 (Kapitel 7 & 8)**.
-
-**Was wo zu finden ist:**
+Dieses Projekt ist die **technische Umsetzung** von **Band 3: Sensoren & Monitoring**.
 
 **Hier auf GitHub (kostenlos):**
-- ✅ Kompletter Code (funktionsfähig)
-- ✅ Schaltpläne (nachbaubar)
-- ✅ Stückliste (mit Links)
-- ✅ Installation (Step-by-Step)
-- ✅ Troubleshooting (alle Probleme)
+- ✅ Kompletter Code
+- ✅ Hardware-Dokumentation
+- ✅ Stückliste
+- ✅ Troubleshooting
 
-**Im Buch (folgt 2025, ~7€ Kindle):**
-- Die **Story** vom Bauen (Trial & Error)
-- Alle **Fehler & Learnings** im Detail
+**Im Buch (erscheint Q2 2026):**
+- Die Story vom Bauen (Trial & Error)
+- Alle Fehler & Learnings im Detail
 - Warum Messen besser ist als Raten
-- Dashboard-Integration Schritt-für-Schritt
 - Kalibrierung mit echten Beispielen
-
-**Strategie:** Hardware muss frei sein (sonst baut's keiner nach!). Die Story gibt's im Buch für die, die "Danke" sagen wollen.
-
-**Hier ist alles. Wenn's dir hilft, kauf das Buch. Wenn nicht, auch OK.** 😊
 
 ---
 
-## 📄 Lizenz
+## 📜 Lizenz
 
-- **Software:** MIT License (frei verwendbar)
-- **Hardware:** CC BY-SA 4.0 (mit Namensnennung)
+- **Software:** MIT License
+- **Hardware:** CC BY-SA 4.0
 - **Dokumentation:** CC BY-SA 4.0
 
 ---
 
 ## ⚓ Status
 
-- ✅ Hardware: Funktioniert, getestet
-- ✅ Software: Stabil, OTA läuft
-- ✅ MQTT: Live-Daten fließen
-- ✅ Dashboard: Widgets laufen
-- 🔄 Gehäuse: 3D-Druck läuft
-- 🔄 Boot-Installation: Vorbereitung
-- 📝 Buch: In Arbeit
+```
+Hardware:           ✅ Getestet
+Firmware:           ✅ Stabil
+MQTT:               ✅ Funktioniert
+BoatOS Integration: ✅ Widgets laufen
+Boot-Installation:  🔄 Ausstehend
+Buch:               🔄 In Arbeit
+```
 
 ---
 
-**Made with ⚓ and many ☕**
+**Made with ⚓ and ☕**
 
 *"Man braucht kein NMEA2000 für 2000€. Man braucht nur ESP32 für 8€ und die Bereitschaft zu löten."*
