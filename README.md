@@ -465,9 +465,13 @@ logbuch-ohne-pose/
 
 **Nicht reich werden – unsterblich werden.**
 
-In 20 Jahren googelt jemand „DIY Boot ESP32", findet dieses Repo, baut es nach, und denkt: *„Wer war dieser Maik?"*
+Wahrer Reichtum ist nicht das, was auf dem Konto liegt. Wahrer Reichtum ist Wissen, das frei zugänglich ist. Für jeden. Für immer. Ohne Paywall, ohne Newsletter-Zwang, ohne „Kauf meinen Kurs für 499€".
 
-Das ist der Plan.
+Wissen stirbt, wenn man es einschließt. Wissen lebt, wenn man es teilt.
+
+In 20 Jahren googelt jemand „DIY Boot ESP32", findet dieses Repo, baut es nach, verbessert es, teilt es weiter – und denkt vielleicht kurz: *„Wer war dieser Maik?"*
+
+Das reicht. Das ist der Plan.
 
 ---
 
