@@ -64,7 +64,7 @@ V3: Controller-Einheit + Klemmleiste  ← AKTUELL
 | 5 | Der 3D-Druck | ASA, PETG und geschmolzenes PLA |
 | 6 | Die Controller-Einheit | ESP32 + Klemmleiste |
 | 7 | Das Gesamtsystem | Alles zusammen, BoatOS-Integration |
-| 8 | Open Source & Business | DIY frei, Firmen zahlen |
+| 8 | Open Source & Unsterblichkeit | Alles frei, für immer |
 
 ---
 
@@ -87,20 +87,21 @@ V3: Controller-Einheit + Klemmleiste  ← AKTUELL
 
 ## 💼 Business-Modell
 
-### DIY (kostenlos):
+### 100% Open Source – Keine Lizenz!
+
 ```
 ✅ STL-Dateien
 ✅ Schaltpläne
 ✅ Firmware
 ✅ Anleitung
+✅ Für JEDEN – auch Firmen!
 ```
 
-### Firmen (Lizenz):
-```
-💼 2.500€ einmalig – dann unbegrenzt produzieren
-📜 Geschützt durch Gebrauchsmuster
-🤝 Kein Tracking, kein Aufwand
-```
+**Kein Gebrauchsmuster. Kein Papierkram. Keine Steuern.**
+
+### 💸 "Lizenzgebühren"
+
+> *"Du willst das kommerziell nutzen? Kauf die Buchreihe. Dann sind wir quitt."* 😄
 
 ---
 
@@ -114,9 +115,8 @@ V3: Controller-Einheit + Klemmleiste  ← AKTUELL
 
 ## 📜 Lizenz
 
-- **DIY:** CC BY-NC-SA (kostenlos für privat)
-- **Kommerziell:** Lizenz erforderlich
-- **Schutz:** Gebrauchsmuster (10 Jahre)
+- **Alles:** Open Source, frei für alle
+- **"Lizenz":** Buchreihe kaufen 📚
 
 ---
 
