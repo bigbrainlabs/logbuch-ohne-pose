@@ -33,6 +33,8 @@ Spoiler: Das nervt.
 
 **Auch auf Englisch:** *Logbook Without Posing – Volume 1: The Engine Runs*
 
+📖 [Amazon.de (Deutsch)](https://www.amazon.de/dp/B0GLXGSRRL) · 📖 [Amazon.com (English)](https://www.amazon.com/dp/B0GM1N9R5Z)
+
 [→ Zum Band](band-1-der-motor-laeuft/)
 
 **Running Gag:** *"Der Motor läuft. Seit 1989. Immer."*
@@ -58,6 +60,8 @@ Spoiler: Kommt drauf an.
 - Das System lernt mit (MQTT, Dashboard, Prognosen)
 
 **Auch auf Englisch:** *Logbook Without Posing – Volume 2: Power Is Never Simple*
+
+📖 [Amazon.de (Deutsch)](https://www.amazon.de/dp/B0GM1S11Q9) · 📖 [Amazon.com (English)](https://www.amazon.com/dp/B0GM1QNCFK)
 
 [→ Zum Band](band-2-strom/)
 
@@ -421,7 +425,8 @@ logbuch-ohne-pose/
 - **BoatOS:** [github.com/bigbrainlabs/BoatOS](https://github.com/bigbrainlabs/BoatOS)
 
 **Bücher:**
-- Amazon KDP – Band 1 + 2 live (DE + EN)
+- 📖 Band 1 – Der Motor läuft: [Amazon.de](https://www.amazon.de/dp/B0GLXGSRRL) · [Amazon.com](https://www.amazon.com/dp/B0GM1N9R5Z)
+- 📖 Band 2 – Strom ist nie einfach: [Amazon.de](https://www.amazon.de/dp/B0GM1S11Q9) · [Amazon.com](https://www.amazon.com/dp/B0GM1QNCFK)
 
 **Community:**
 - GitHub Discussions (bevorzugt!)
